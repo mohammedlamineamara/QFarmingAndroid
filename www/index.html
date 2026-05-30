@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a1628">
+    <meta name="description" content="Q-Farming 2.0 - AI-Powered Smart Agriculture ERP Platform">
+    <title>Q-Farming 2.0 | AI Smart Agriculture ERP</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-50:#ecfdf5;--primary-100:#d1fae5;--primary-200:#a7f3d0;--primary-300:#6ee7b7;--primary-400:#34d399;--primary-500:#10b981;--primary-600:#059669;--primary-700:#047857;--primary-800:#065f46;--primary-900:#064e3b;
+            --cyan-400:#22d3ee;--cyan-500:#06b6d4;--cyan-600:#0891b2;
+            --blue-400:#60a5fa;--blue-500:#3b82f6;--blue-600:#2563eb;
+            --bg-dark:#0a0f1a;--bg-dark-elevated:#111827;--bg-dark-card:rgba(17,24,39,0.7);--bg-dark-glass:rgba(17,24,39,0.4);
+            --bg-light:#f8fafc;--bg-light-elevated:#ffffff;--bg-light-card:rgba(255,255,255,0.8);--bg-light-glass:rgba(255,255,255,0.6);
+            --text-primary-dark:#f8fafc;--text-secondary-dark:#94a3b8;
+            --text-primary-light:#0f172a;--text-secondary-light:#64748b;
+            --success:#10b981;--warning:#f59e0b;--danger:#ef4444;--info:#3b82f6;
+            --glow-primary:0 0 20px rgba(16,185,129,0.3);--glow-cyan:0 0 20px rgba(6,182,212,0.3);--glow-blue:0 0 20px rgba(59,130,246,0.3);
+            --shadow-sm:0 1px 2px rgba(0,0,0,0.05);--shadow-md:0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-xl:0 20px 25px -5px rgba(0,0,0,0.1),0 10px 10px -5px rgba(0,0,0,0.04);
+            --shadow-glass:0 8px 32px rgba(0,0,0,0.12);
+            --radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:24px;--radius-full:9999px;
+            --transition-fast:150ms cubic-bezier(0.4,0,0.2,1);--transition-base:250ms cubic-bezier(0.4,0,0.2,1);
+            --transition-slow:350ms cubic-bezier(0.4,0,0.2,1);--transition-spring:500ms cubic-bezier(0.34,1.56,0.64,1);
+        }
+        [data-theme="dark"]{--bg:var(--bg-dark);--bg-elevated:var(--bg-dark-elevated);--bg-card:var(--bg-dark-card);--bg-glass:var(--bg-dark-glass);--text-primary:var(--text-primary-dark);--text-secondary:var(--text-secondary-dark);--border:rgba(255,255,255,0.08);--border-hover:rgba(255,255,255,0.15);--shadow-color:rgba(0,0,0,0.4);--gradient-hero:linear-gradient(135deg,#0a0f1a 0%,#111827 50%,#0f172a 100%);--gradient-card:linear-gradient(135deg,rgba(17,24,39,0.8) 0%,rgba(15,23,42,0.6) 100%);--gradient-glow:radial-gradient(ellipse at 50% 0%,rgba(16,185,129,0.15) 0%,transparent 50%);}
+        [data-theme="light"]{--bg:var(--bg-light);--bg-elevated:var(--bg-light-elevated);--bg-card:var(--bg-light-card);--bg-glass:var(--bg-light-glass);--text-primary:var(--text-primary-light);--text-secondary:var(--text-secondary-light);--border:rgba(0,0,0,0.06);--border-hover:rgba(0,0,0,0.12);--shadow-color:rgba(0,0,0,0.08);--gradient-hero:linear-gradient(135deg,#f0fdf4 0%,#f8fafc 50%,#ecfdf5 100%);--gradient-card:linear-gradient(135deg,rgba(255,255,255,0.9) 0%,rgba(248,250,252,0.8) 100%);--gradient-glow:radial-gradient(ellipse at 50% 0%,rgba(16,185,129,0.08) 0%,transparent 50%);}
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+        html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.5;overflow-x:hidden;min-height:100vh;transition:background-color var(--transition-slow),color var(--transition-slow)}
+        ::-webkit-scrollbar{width:6px;height:6px}
+        ::-webkit-scrollbar-track{background:transparent}
+        ::-webkit-scrollbar-thumb{background:var(--border-hover);border-radius:3px}
+        ::-webkit-scrollbar-thumb:hover{background:var(--text-secondary)}
+
+        .loader{position:fixed;inset:0;background:var(--bg-dark);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1),visibility 0.8s}
+        .loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+        .loader-content{text-align:center;position:relative}
+        .loader-icon{font-size:5rem;margin-bottom:1.5rem;animation:loaderPulse 2s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(16,185,129,0.5))}
+        @keyframes loaderPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.1);opacity:0.8}}
+        .loader h2{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--primary-400),var(--cyan-400),var(--blue-400));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.5rem;letter-spacing:-0.02em}
+        .loader p{color:var(--text-secondary-dark);font-size:0.9rem;font-weight:400;letter-spacing:0.05em;text-transform:uppercase}
+        .loader-progress{width:240px;height:3px;background:rgba(255,255,255,0.1);border-radius:2px;margin:1.5rem auto 0;overflow:hidden;position:relative}
+        .loader-progress-fill{height:100%;background:linear-gradient(90deg,var(--primary-500),var(--cyan-400),var(--blue-400));width:0%;border-radius:2px;animation:loaderProgress 2.5s cubic-bezier(0.4,0,0.2,1) forwards;box-shadow:0 0 10px rgba(16,185,129,0.5)}
+        @keyframes loaderProgress{0%{width:0%}50%{width:70%}100%{width:100%}}
+        .loader-dots{display:flex;gap:6px;justify-content:center;margin-top:1rem}
+        .loader-dot{width:6px;height:6px;border-radius:50%;background:var(--primary-500);animation:loaderDot 1.4s ease-in-out infinite}
+        .loader-dot:nth-child(2){animation-delay:0.2s}
+        .loader-dot:nth-child(3){animation-delay:0.4s}
+        @keyframes loaderDot{0%,80%,100%{transform:scale(0.6);opacity:0.5}40%{transform:scale(1);opacity:1}}
+
+        .app{min-height:100vh;display:flex;flex-direction:column;opacity:0;transform:translateY(20px);transition:opacity 0.6s ease-out,transform 0.6s ease-out}
+        .app.visible{opacity:1;transform:translateY(0)}
+        .hidden{display:none!important}
+
+        .top-nav{position:sticky;top:0;z-index:100;background:var(--bg-glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border);padding:0.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;transition:all var(--transition-base)}
+        .top-nav-brand{display:flex;align-items:center;gap:0.75rem}
+        .brand-logo{width:40px;height:40px;border-radius:var(--radius-md);background:linear-gradient(135deg,var(--primary-600),var(--cyan-500));display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:var(--glow-primary);transition:transform var(--transition-base),box-shadow var(--transition-base)}
+        .brand-logo:hover{transform:scale(1.05) rotate(-5deg);box-shadow:0 0 30px rgba(16,185,129,0.5)}
+        .brand-text{display:flex;flex-direction:column}
+        .brand-name{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text-primary);letter-spacing:-0.02em;line-height:1.2}
+        .brand-tagline{font-size:0.65rem;color:var(--text-secondary);font-weight:500;letter-spacing:0.08em;text-transform:uppercase}
+        .top-nav-actions{display:flex;align-items:center;gap:0.5rem}
+        .nav-action-btn{width:40px;height:40px;border-radius:var(--radius-md);border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all var(--transition-fast);position:relative;font-size:1.1rem}
+        .nav-action-btn:hover{background:var(--bg-elevated);border-color:var(--border-hover);color:var(--text-primary);transform:translateY(-1px);box-shadow:var(--shadow-md)}
+        .nav-action-btn:active{transform:translateY(0) scale(0.95)}
+        .nav-action-btn .badge-dot{position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:var(--danger);border:2px solid var(--bg);animation:badgePulse 2s infinite}
+        @keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,0.4)}50%{box-shadow:0 0 0 4px rgba(239,68,68,0)}}
+        .system-status{display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.75rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-full);font-size:0.75rem;font-weight:500;color:var(--text-secondary);transition:all var(--transition-fast)}
+        .system-status:hover{border-color:var(--border-hover);background:var(--bg-elevated)}
+        .status-dot{width:6px;height:6px;border-radius:50%;background:var(--success);box-shadow:0 0 8px rgba(16,185,129,0.6);animation:statusPulse 3s infinite}
+        @keyframes statusPulse{0%,100%{opacity:1}50%{opacity:0.5}}
+
+        .sidebar{position:fixed;left:0;top:73px;bottom:0;width:72px;background:var(--bg-glass);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;padding:1rem 0;z-index:90;transition:width var(--transition-slow),box-shadow var(--transition-base);overflow:hidden}
+        .sidebar:hover{width:220px;box-shadow:4px 0 24px var(--shadow-color)}
+        .sidebar-nav{display:flex;flex-direction:column;gap:0.25rem;width:100%;padding:0 0.5rem}
+        .sidebar-item{display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;border-radius:var(--radius-md);border:none;background:transparent;color:var(--text-secondary);cursor:pointer;transition:all var(--transition-fast);width:100%;text-align:left;position:relative;overflow:hidden;white-space:nowrap}
+        .sidebar-item::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:0;background:linear-gradient(180deg,var(--primary-500),var(--cyan-400));border-radius:0 2px 2px 0;transition:height var(--transition-fast)}
+        .sidebar-item:hover{background:var(--bg-card);color:var(--text-primary)}
+        .sidebar-item:hover::before{height:60%}
+        .sidebar-item.active{background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(6,182,212,0.1));color:var(--primary-400);box-shadow:inset 0 0 20px rgba(16,185,129,0.05)}
+        .sidebar-item.active::before{height:80%}
+        .sidebar-item .icon{font-size:1.3rem;width:24px;text-align:center;flex-shrink:0;transition:transform var(--transition-fast)}
+        .sidebar-item:hover .icon{transform:scale(1.1)}
+        .sidebar-item .label{font-size:0.85rem;font-weight:500;opacity:0;transition:opacity var(--transition-fast)}
+        .sidebar:hover .sidebar-item .label{opacity:1}
+        .sidebar-divider{width:60%;height:1px;background:var(--border);margin:0.75rem 0;opacity:0.5}
+
+        .main-wrapper{margin-left:72px;flex:1;display:flex;flex-direction:column;min-height:calc(100vh - 73px);transition:margin-left var(--transition-slow)}
+        .sidebar:hover ~ .main-wrapper{margin-left:220px}
+        .main-content{flex:1;padding:1.5rem;max-width:1400px;margin:0 auto;width:100%}
+
+        .hero-section{background:var(--gradient-hero);border:1px solid var(--border);border-radius:var(--radius-xl);padding:2rem;margin-bottom:1.5rem;position:relative;overflow:hidden;transition:all var(--transition-base)}
+        .hero-section::before{content:'';position:absolute;inset:0;background:var(--gradient-glow);pointer-events:none}
+        .hero-section::after{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(16,185,129,0.1) 0%,transparent 70%);pointer-events:none;animation:heroGlow 8s ease-in-out infinite}
+        @keyframes heroGlow{0%,100%{transform:translate(0,0) scale(1);opacity:0.5}50%{transform:translate(-30px,30px) scale(1.1);opacity:0.8}}
+        .hero-content{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
+        .hero-text h1{font-family:'Space Grotesk',sans-serif;font-size:1.75rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;letter-spacing:-0.02em}
+        .hero-text p{color:var(--text-secondary);font-size:0.95rem;max-width:500px}
+        .hero-ai-badge{display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;background:linear-gradient(135deg,rgba(16,185,129,0.2),rgba(6,182,212,0.15));border:1px solid rgba(16,185,129,0.3);border-radius:var(--radius-full);font-size:0.75rem;font-weight:600;color:var(--primary-400);margin-top:0.75rem;animation:aiBadgeGlow 3s ease-in-out infinite}
+        @keyframes aiBadgeGlow{0%,100%{box-shadow:0 0 10px rgba(16,185,129,0.2)}50%{box-shadow:0 0 20px rgba(16,185,129,0.4)}}
+        .hero-ai-badge .ai-dot{width:6px;height:6px;border-radius:50%;background:var(--primary-400);animation:aiDotPulse 1.5s infinite}
+        @keyframes aiDotPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:0.5}}
+        .hero-stats{display:flex;gap:2rem}
+        .hero-stat{text-align:center}
+        .hero-stat-value{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,var(--primary-400),var(--cyan-400));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hero-stat-label{font-size:0.7rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-top:0.25rem}
+
+        .kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:1.5rem}
+        @media(min-width:768px){.kpi-grid{grid-template-columns:repeat(4,1fr)}}
+        .kpi-card{background:var(--gradient-card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;position:relative;overflow:hidden;cursor:pointer;transition:all var(--transition-base);transform-style:preserve-3d}
+        .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary-500),var(--cyan-400),var(--blue-400));opacity:0;transition:opacity var(--transition-fast)}
+        .kpi-card:hover{transform:translateY(-4px) scale(1.01);box-shadow:var(--shadow-xl),var(--glow-primary);border-color:var(--border-hover)}
+        .kpi-card:hover::before{opacity:1}
+        .kpi-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem}
+        .kpi-icon-wrapper{width:48px;height:48px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:1.5rem;position:relative;overflow:hidden}
+        .kpi-icon-wrapper.yield{background:linear-gradient(135deg,rgba(16,185,129,0.2),rgba(16,185,129,0.05));box-shadow:0 0 20px rgba(16,185,129,0.2)}
+        .kpi-icon-wrapper.water{background:linear-gradient(135deg,rgba(6,182,212,0.2),rgba(6,182,212,0.05));box-shadow:0 0 20px rgba(6,182,212,0.2)}
+        .kpi-icon-wrapper.weather{background:linear-gradient(135deg,rgba(245,158,11,0.2),rgba(245,158,11,0.05));box-shadow:0 0 20px rgba(245,158,11,0.2)}
+        .kpi-icon-wrapper.revenue{background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(59,130,246,0.05));box-shadow:0 0 20px rgba(59,130,246,0.2)}
+        .kpi-trend-badge{display:flex;align-items:center;gap:0.25rem;padding:0.25rem 0.5rem;border-radius:var(--radius-sm);font-size:0.75rem;font-weight:600}
+        .kpi-trend-badge.up{background:rgba(16,185,129,0.15);color:var(--primary-400)}
+        .kpi-trend-badge.down{background:rgba(239,68,68,0.15);color:var(--danger)}
+        .kpi-value{font-family:'Space Grotesk',sans-serif;font-size:1.75rem;font-weight:700;color:var(--text-primary);line-height:1.2;margin-bottom:0.25rem}
+        .kpi-label{font-size:0.8rem;color:var(--text-secondary);font-weight:500}
+        .kpi-sub{font-size:0.75rem;color:var(--text-secondary);margin-top:0.5rem;opacity:0.7}
+
+        .glass-card{background:var(--bg-glass);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;transition:all var(--transition-base);position:relative;overflow:hidden}
+        .glass-card:hover{border-color:var(--border-hover);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+        .glass-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+        .glass-card-title{font-size:1rem;font-weight:600;color:var(--text-primary);display:flex;align-items:center;gap:0.5rem}
+        .glass-card-title-icon{width:32px;height:32px;border-radius:var(--radius-sm);background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(6,182,212,0.1));display:flex;align-items:center;justify-content:center;font-size:1rem}
+
+        .chart-container{position:relative;height:200px;margin-top:1rem}
+        .chart-svg{width:100%;height:100%}
+        .chart-line{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 8px currentColor)}
+        .chart-area{opacity:0.15}
+        .chart-grid-line{stroke:var(--border);stroke-width:1;stroke-dasharray:4,4}
+        .chart-axis-text{fill:var(--text-secondary);font-size:10px;font-family:'Inter',sans-serif}
+        .chart-tooltip{position:absolute;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.5rem 0.75rem;font-size:0.8rem;font-weight:500;color:var(--text-primary);pointer-events:none;opacity:0;transition:opacity var(--transition-fast);box-shadow:var(--shadow-lg);z-index:10}
+        .chart-tooltip.visible{opacity:1}
+
+        .bar-chart-container{display:flex;align-items:flex-end;justify-content:space-around;height:160px;gap:0.5rem;padding:0 0.5rem}
+        .bar-group{flex:1;display:flex;flex-direction:column;align-items:center;gap:0.5rem;cursor:pointer;transition:transform var(--transition-fast)}
+        .bar-group:hover{transform:translateY(-4px)}
+        .bar-group:hover .bar{filter:brightness(1.2)}
+        .bar-stack{display:flex;gap:3px;align-items:flex-end;height:120px}
+        .bar{width:12px;border-radius:6px 6px 0 0;transition:all var(--transition-base);position:relative;animation:barGrow 1s ease-out forwards;transform-origin:bottom}
+        @keyframes barGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+        .bar-value{position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:0.65rem;font-weight:600;color:var(--text-secondary);opacity:0;transition:opacity var(--transition-fast);white-space:nowrap}
+        .bar-group:hover .bar-value{opacity:1}
+        .bar-label{font-size:0.7rem;color:var(--text-secondary);font-weight:500}
+        .chart-legend{display:flex;justify-content:center;gap:1.5rem;margin-top:1rem;font-size:0.8rem}
+        .legend-item{display:flex;align-items:center;gap:0.5rem;color:var(--text-secondary)}
+        .legend-dot{width:10px;height:10px;border-radius:50%}
+
+        .efficiency-list{display:flex;flex-direction:column;gap:1.25rem}
+        .efficiency-item{display:flex;flex-direction:column;gap:0.5rem}
+        .efficiency-header{display:flex;justify-content:space-between;align-items:center}
+        .efficiency-name{font-size:0.85rem;font-weight:500;color:var(--text-primary)}
+        .efficiency-value{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:var(--primary-400)}
+        .progress-track{height:8px;background:var(--bg-elevated);border-radius:var(--radius-full);overflow:hidden;position:relative}
+        .progress-fill{height:100%;border-radius:var(--radius-full);transition:width 1.5s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden}
+        .progress-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);animation:progressShine 2s infinite}
+        @keyframes progressShine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+        .progress-fill.water{background:linear-gradient(90deg,var(--cyan-500),var(--blue-500))}
+        .progress-fill.fertilizer{background:linear-gradient(90deg,var(--warning),#f97316)}
+        .progress-fill.energy{background:linear-gradient(90deg,var(--primary-500),var(--cyan-500))}
+
+        .activity-list{display:flex;flex-direction:column;gap:0.75rem}
+        .activity-item{display:flex;align-items:center;gap:0.75rem;padding:0.875rem 1rem;background:var(--bg-card);border-radius:var(--radius-md);border:1px solid var(--border);transition:all var(--transition-fast);cursor:pointer}
+        .activity-item:hover{background:var(--bg-elevated);border-color:var(--border-hover);transform:translateX(4px);box-shadow:var(--shadow-md)}
+        .activity-icon{width:40px;height:40px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;transition:transform var(--transition-fast)}
+        .activity-item:hover .activity-icon{transform:scale(1.1) rotate(-5deg)}
+        .activity-icon.success{background:linear-gradient(135deg,rgba(16,185,129,0.2),rgba(16,185,129,0.05))}
+        .activity-icon.warning{background:linear-gradient(135deg,rgba(245,158,11,0.2),rgba(245,158,11,0.05))}
+        .activity-icon.info{background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(59,130,246,0.05))}
+        .activity-icon.danger{background:linear-gradient(135deg,rgba(239,68,68,0.2),rgba(239,68,68,0.05))}
+        .activity-info{flex:1;min-width:0}
+        .activity-title{font-size:0.85rem;font-weight:600;color:var(--text-primary);margin-bottom:0.25rem}
+        .activity-time{font-size:0.75rem;color:var(--text-secondary)}
+        .activity-status{width:8px;height:8px;border-radius:50%;flex-shrink:0;animation:statusPulse 2s infinite}
+        .activity-status.new{background:var(--primary-500)}
+        .activity-status.read{background:var(--border-hover);animation:none}
+
+        .field-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+        @media(min-width:768px){.field-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(min-width:1024px){.field-grid{grid-template-columns:repeat(3,1fr)}}
+        .field-card{background:var(--gradient-card);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all var(--transition-base);cursor:pointer;position:relative}
+        .field-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-xl);border-color:var(--primary-500)}
+        .field-card-map{height:120px;background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(6,182,212,0.1));position:relative;overflow:hidden}
+        .field-card-map::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(16,185,129,0.3) 0%,transparent 50%),radial-gradient(circle at 70% 60%,rgba(6,182,212,0.2) 0%,transparent 50%)}
+        .field-card-map-pattern{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:20px 20px}
+        .field-card-content{padding:1rem}
+        .field-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem}
+        .field-card-name{font-weight:700;font-size:0.95rem;color:var(--text-primary)}
+        .field-card-status{font-size:0.7rem;padding:0.25rem 0.75rem;border-radius:var(--radius-full);font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
+        .field-card-status.active{background:rgba(16,185,129,0.15);color:var(--primary-400);box-shadow:0 0 10px rgba(16,185,129,0.2)}
+        .field-card-status.irrigation{background:rgba(6,182,212,0.15);color:var(--cyan-400);box-shadow:0 0 10px rgba(6,182,212,0.2)}
+        .field-card-status.harvest{background:rgba(245,158,11,0.15);color:var(--warning);box-shadow:0 0 10px rgba(245,158,11,0.2)}
+        .field-card-meta{display:flex;gap:1rem;font-size:0.8rem;color:var(--text-secondary);margin-bottom:0.75rem}
+        .field-card-progress{height:6px;background:var(--bg-elevated);border-radius:var(--radius-full);overflow:hidden}
+        .field-card-progress-bar{height:100%;border-radius:var(--radius-full);background:linear-gradient(90deg,var(--primary-500),var(--cyan-400));transition:width 1s ease-out;position:relative;overflow:hidden}
+        .field-card-progress-bar::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:progressShine 2s infinite}
+
+        .inventory-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+        @media(min-width:768px){.inventory-grid{grid-template-columns:repeat(3,1fr)}}
+        @media(min-width:1024px){.inventory-grid{grid-template-columns:repeat(4,1fr)}}
+        .inventory-card{background:var(--gradient-card);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;text-align:center;transition:all var(--transition-base);cursor:pointer;position:relative;overflow:hidden}
+        .inventory-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--primary-500),var(--cyan-400));opacity:0;transition:opacity var(--transition-fast)}
+        .inventory-card:hover{transform:translateY(-4px) scale(1.02);box-shadow:var(--shadow-xl);border-color:var(--border-hover)}
+        .inventory-card:hover::before{opacity:1}
+        .inventory-card-icon{font-size:2.5rem;margin-bottom:0.75rem;transition:transform var(--transition-fast)}
+        .inventory-card:hover .inventory-card-icon{transform:scale(1.15) rotate(-5deg)}
+        .inventory-card-name{font-weight:600;font-size:0.9rem;color:var(--text-primary);margin-bottom:0.25rem}
+        .inventory-card-stock{font-size:0.8rem;color:var(--text-secondary);font-weight:500}
+        .inventory-card-stock.low{color:var(--danger);font-weight:700;animation:lowStockPulse 2s infinite}
+        @keyframes lowStockPulse{0%,100%{opacity:1}50%{opacity:0.6}}
+        .inventory-card-bar{height:4px;background:var(--bg-elevated);border-radius:var(--radius-full);margin-top:0.75rem;overflow:hidden}
+        .inventory-card-bar-fill{height:100%;border-radius:var(--radius-full);transition:width 1s ease-out}
+
+        .sensor-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+        @media(min-width:768px){.sensor-grid{grid-template-columns:repeat(3,1fr)}}
+        @media(min-width:1024px){.sensor-grid{grid-template-columns:repeat(4,1fr)}}
+        .sensor-card{background:var(--gradient-card);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;text-align:center;transition:all var(--transition-base);position:relative;overflow:hidden}
+        .sensor-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(16,185,129,0.1) 0%,transparent 60%);pointer-events:none}
+        .sensor-card:hover{border-color:var(--primary-500);box-shadow:var(--glow-primary);transform:translateY(-2px)}
+        .sensor-ring{width:80px;height:80px;margin:0 auto 0.75rem;position:relative}
+        .sensor-ring svg{transform:rotate(-90deg)}
+        .sensor-ring-bg{fill:none;stroke:var(--bg-elevated);stroke-width:6}
+        .sensor-ring-progress{fill:none;stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset 1.5s ease-out;filter:drop-shadow(0 0 6px currentColor)}
+        .sensor-value{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text-primary)}
+        .sensor-label{font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.25rem}
+        .sensor-status{font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:var(--radius-full);font-weight:600;display:inline-block}
+        .sensor-status.optimal{background:rgba(16,185,129,0.15);color:var(--primary-400)}
+        .sensor-status.warning{background:rgba(245,158,11,0.15);color:var(--warning)}
+        .sensor-status.critical{background:rgba(239,68,68,0.15);color:var(--danger)}
+
+        .action-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+        @media(min-width:768px){.action-grid{grid-template-columns:repeat(4,1fr)}}
+        .action-btn{background:var(--gradient-card);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;display:flex;flex-direction:column;align-items:center;gap:0.75rem;cursor:pointer;transition:all var(--transition-base);position:relative;overflow:hidden}
+        .action-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(16,185,129,0.05),rgba(6,182,212,0.05));opacity:0;transition:opacity var(--transition-fast)}
+        .action-btn:hover{transform:translateY(-4px) scale(1.02);box-shadow:var(--shadow-xl),var(--glow-primary);border-color:var(--primary-500)}
+        .action-btn:hover::before{opacity:1}
+        .action-btn:active{transform:translateY(-2px) scale(0.98)}
+        .action-btn .icon{font-size:2rem;transition:transform var(--transition-fast);position:relative;z-index:1}
+        .action-btn:hover .icon{transform:scale(1.2) rotate(-10deg)}
+        .action-btn .label{font-size:0.8rem;font-weight:600;color:var(--text-primary);position:relative;z-index:1}
+        .action-btn .sub{font-size:0.7rem;color:var(--text-secondary);position:relative;z-index:1}
+
+        .fab{position:fixed;bottom:2rem;right:2rem;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--primary-600),var(--cyan-500));border:none;color:white;font-size:1.5rem;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(16,185,129,0.4),var(--glow-primary);transition:all var(--transition-base);z-index:80}
+        .fab:hover{transform:scale(1.1) rotate(90deg);box-shadow:0 6px 30px rgba(16,185,129,0.6)}
+        .fab:active{transform:scale(0.95)}
+
+        .modal-overlay{position:fixed;inset:0;z-index:200;display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;transition:opacity var(--transition-base),visibility var(--transition-base)}
+        .modal-overlay.visible{opacity:1;visibility:visible}
+        .modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+        .modal-content{position:relative;background:var(--bg-glass);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--border);border-radius:var(--radius-xl) var(--radius-xl) 0 0;width:100%;max-width:600px;max-height:85vh;overflow-y:auto;padding:1.5rem;transform:translateY(100%);transition:transform var(--transition-slow)}
+        .modal-overlay.visible .modal-content{transform:translateY(0)}
+        .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+        .modal-title{font-family:'Space Grotesk',sans-serif;font-size:1.25rem;font-weight:700;color:var(--text-primary)}
+        .modal-close{width:36px;height:36px;border-radius:var(--radius-md);border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.25rem;transition:all var(--transition-fast)}
+        .modal-close:hover{background:var(--bg-elevated);color:var(--text-primary);transform:rotate(90deg)}
+
+        .form-group{margin-bottom:1.25rem}
+        .form-group label{display:block;font-size:0.85rem;font-weight:600;color:var(--text-primary);margin-bottom:0.5rem}
+        .form-group input,.form-group select,.form-group textarea{width:100%;padding:0.875rem 1rem;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--bg-card);color:var(--text-primary);font-size:0.9rem;font-family:'Inter',sans-serif;transition:all var(--transition-fast)}
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--primary-500);box-shadow:0 0 0 3px rgba(16,185,129,0.15),var(--glow-primary)}
+        .form-group input::placeholder,.form-group textarea::placeholder{color:var(--text-secondary);opacity:0.6}
+        .btn-primary,.btn-secondary,.btn-danger,.btn-ghost{padding:0.75rem 1.5rem;border-radius:var(--radius-md);border:none;font-weight:600;font-size:0.9rem;cursor:pointer;transition:all var(--transition-fast);font-family:'Inter',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:0.5rem}
+        .btn-primary{background:linear-gradient(135deg,var(--primary-600),var(--cyan-500));color:white;box-shadow:0 4px 15px rgba(16,185,129,0.3)}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(16,185,129,0.4)}
+        .btn-primary:active{transform:translateY(0) scale(0.98)}
+        .btn-secondary{background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border)}
+        .btn-secondary:hover{background:var(--bg-elevated);border-color:var(--border-hover)}
+        .btn-danger{background:linear-gradient(135deg,var(--danger),#f97316);color:white;box-shadow:0 4px 15px rgba(239,68,68,0.3)}
+        .btn-ghost{background:transparent;color:var(--text-secondary)}
+        .btn-ghost:hover{background:var(--bg-card);color:var(--text-primary)}
+
+        .toast-container{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:300;display:flex;flex-direction:column;gap:0.5rem;pointer-events:none}
+        .toast{background:var(--bg-glass);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--border);border-radius:var(--radius-lg);padding:0.875rem 1.25rem;display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;font-weight:500;color:var(--text-primary);box-shadow:var(--shadow-xl);transform:translateY(20px) scale(0.95);opacity:0;transition:all var(--transition-spring);pointer-events:auto;min-width:280px}
+        .toast.visible{transform:translateY(0) scale(1);opacity:1}
+        .toast-icon{font-size:1.25rem;flex-shrink:0}
+        .toast-success{border-left:3px solid var(--success)}
+        .toast-warning{border-left:3px solid var(--warning)}
+        .toast-error{border-left:3px solid var(--danger)}
+        .toast-info{border-left:3px solid var(--info)}
+
+        .tab-section{display:none;animation:tabFadeIn 0.4s ease-out}
+        .tab-section.active{display:block}
+        @keyframes tabFadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+        .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
+        .section-title{font-family:'Space Grotesk',sans-serif;font-size:1.25rem;font-weight:700;color:var(--text-primary);display:flex;align-items:center;gap:0.5rem}
+        .section-title-icon{font-size:1.3rem}
+        .live-indicator{display:flex;align-items:center;gap:0.5rem;font-size:0.75rem;color:var(--success);font-weight:600;padding:0.4rem 0.75rem;background:rgba(16,185,129,0.1);border-radius:var(--radius-full);border:1px solid rgba(16,185,129,0.2)}
+        .live-pulse{width:8px;height:8px;background:var(--success);border-radius:50%;animation:livePulse 2s infinite;box-shadow:0 0 8px rgba(16,185,129,0.6)}
+        @keyframes livePulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(0.6);opacity:0.5}}
+
+        .search-bar{position:relative;margin-bottom:1.5rem}
+        .search-bar input{width:100%;padding:0.875rem 1rem 0.875rem 2.75rem;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--bg-card);color:var(--text-primary);font-size:0.9rem;transition:all var(--transition-fast)}
+        .search-bar input:focus{outline:none;border-color:var(--primary-500);box-shadow:0 0 0 3px rgba(16,185,129,0.15)}
+        .search-bar input::placeholder{color:var(--text-secondary);opacity:0.6}
+        .search-bar .search-icon{position:absolute;left:1rem;top:50%;transform:translateY(-50%);font-size:1rem;color:var(--text-secondary)}
+
+        .cat-filter{display:flex;gap:0.5rem;margin-bottom:1.5rem;overflow-x:auto;padding-bottom:0.5rem}
+        .cat-btn{padding:0.5rem 1rem;border:1px solid var(--border);background:var(--bg-card);border-radius:var(--radius-full);font-size:0.8rem;white-space:nowrap;cursor:pointer;transition:all var(--transition-fast);font-weight:500;color:var(--text-secondary)}
+        .cat-btn:hover{background:var(--bg-elevated);border-color:var(--border-hover);color:var(--text-primary)}
+        .cat-btn.active{background:linear-gradient(135deg,var(--primary-600),var(--cyan-500));color:white;border-color:transparent;box-shadow:var(--glow-primary)}
+
+        .settings-group{margin-bottom:2rem}
+        .settings-group-title{font-size:0.8rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;padding-left:0.5rem}
+        .setting-item{background:var(--bg-card);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:0.75rem;display:flex;justify-content:space-between;align-items:center;transition:all var(--transition-fast)}
+        .setting-item:hover{border-color:var(--border-hover);box-shadow:var(--shadow-md)}
+        .setting-info label{font-weight:600;font-size:0.9rem;color:var(--text-primary);display:block}
+        .setting-info p{font-size:0.8rem;color:var(--text-secondary);margin-top:0.25rem}
+
+        .toggle{position:relative;width:52px;height:28px;cursor:pointer}
+        .toggle input{opacity:0;width:0;height:0}
+        .toggle-slider{position:absolute;cursor:pointer;inset:0;background:var(--bg-elevated);border-radius:28px;border:1px solid var(--border);transition:0.3s}
+        .toggle-slider::before{content:'';position:absolute;height:22px;width:22px;left:2px;bottom:2px;background:white;border-radius:50%;transition:0.3s;box-shadow:0 2px 4px rgba(0,0,0,0.2)}
+        input:checked+.toggle-slider{background:linear-gradient(135deg,var(--primary-500),var(--cyan-500));border-color:transparent}
+        input:checked+.toggle-slider::before{transform:translateX(24px)}
+
+        .about-card{text-align:center;padding:2.5rem 1.5rem;background:var(--gradient-card);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:var(--radius-xl)}
+        .about-logo{font-size:4rem;margin-bottom:0.5rem;filter:drop-shadow(0 0 20px rgba(16,185,129,0.3))}
+        .about-card h4{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:0.25rem}
+        .about-card .version{font-size:0.8rem;color:var(--text-secondary);margin-top:0.5rem}
+        .about-card .author{font-size:0.75rem;color:var(--text-secondary);margin-top:0.25rem}
+
+        .grid-2{display:grid;grid-template-columns:1fr;gap:1.5rem}
+        @media(min-width:768px){.grid-2{grid-template-columns:repeat(2,1fr)}}
+        .grid-3{display:grid;grid-template-columns:1fr;gap:1.5rem}
+        @media(min-width:768px){.grid-3{grid-template-columns:repeat(2,1fr)}}
+        @media(min-width:1024px){.grid-3{grid-template-columns:repeat(3,1fr)}}
+
+        .notification-panel{position:fixed;top:73px;right:0;bottom:0;width:380px;background:var(--bg-glass);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-left:1px solid var(--border);z-index:95;transform:translateX(100%);transition:transform var(--transition-slow);overflow-y:auto;padding:1.5rem}
+        .notification-panel.visible{transform:translateX(0)}
+        .notification-panel-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+        .notification-panel-title{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700}
+        .notification-item{display:flex;gap:0.75rem;padding:1rem;background:var(--bg-card);border-radius:var(--radius-md);border:1px solid var(--border);margin-bottom:0.75rem;transition:all var(--transition-fast);cursor:pointer}
+        .notification-item:hover{background:var(--bg-elevated);border-color:var(--border-hover);transform:translateX(-4px)}
+        .notification-item.unread{border-left:3px solid var(--primary-500)}
+        .notification-icon{width:36px;height:36px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+        .notification-content{flex:1}
+        .notification-title{font-size:0.85rem;font-weight:600;color:var(--text-primary);margin-bottom:0.25rem}
+        .notification-desc{font-size:0.75rem;color:var(--text-secondary);margin-bottom:0.25rem}
+        .notification-time{font-size:0.7rem;color:var(--text-secondary);opacity:0.7}
+
+        .calendar-widget{background:var(--gradient-card);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem}
+        .calendar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+        .calendar-month{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem}
+        .calendar-nav{display:flex;gap:0.5rem}
+        .calendar-nav button{width:32px;height:32px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);cursor:pointer;transition:all var(--transition-fast);display:flex;align-items:center;justify-content:center}
+        .calendar-nav button:hover{background:var(--bg-elevated);color:var(--text-primary)}
+        .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:0.25rem;text-align:center}
+        .calendar-day-label{font-size:0.7rem;font-weight:600;color:var(--text-secondary);padding:0.5rem;text-transform:uppercase}
+        .calendar-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:0.8rem;border-radius:var(--radius-sm);cursor:pointer;transition:all var(--transition-fast);position:relative}
+        .calendar-day:hover{background:var(--bg-elevated)}
+        .calendar-day.today{background:linear-gradient(135deg,var(--primary-600),var(--cyan-500));color:white;font-weight:700;box-shadow:var(--glow-primary)}
+        .calendar-day.has-event::after{content:'';position:absolute;bottom:4px;width:4px;height:4px;border-radius:50%;background:var(--primary-400)}
+        .calendar-day.other-month{color:var(--text-secondary);opacity:0.4}
+
+        .worker-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+        @media(min-width:768px){.worker-grid{grid-template-columns:repeat(3,1fr)}}
+        @media(min-width:1024px){.worker-grid{grid-template-columns:repeat(4,1fr)}}
+        .worker-card{background:var(--gradient-card);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;text-align:center;transition:all var(--transition-base);cursor:pointer}
+        .worker-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-xl);border-color:var(--border-hover)}
+        .worker-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--primary-500),var(--cyan-500));display:flex;align-items:center;justify-content:center;font-size:1.75rem;margin:0 auto 0.75rem;box-shadow:var(--glow-primary);transition:transform var(--transition-fast)}
+        .worker-card:hover .worker-avatar{transform:scale(1.1)}
+        .worker-name{font-weight:700;font-size:0.9rem;color:var(--text-primary);margin-bottom:0.25rem}
+        .worker-role{font-size:0.75rem;color:var(--text-secondary);margin-bottom:0.5rem}
+        .worker-status{display:inline-flex;align-items:center;gap:0.4rem;padding:0.25rem 0.75rem;border-radius:var(--radius-full);font-size:0.7rem;font-weight:600}
+        .worker-status.online{background:rgba(16,185,129,0.15);color:var(--primary-400)}
+        .worker-status.offline{background:rgba(100,116,139,0.15);color:var(--text-secondary)}
+        .worker-status.busy{background:rgba(245,158,11,0.15);color:var(--warning)}
+
+        .ai-insight-card{background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(6,182,212,0.05));border:1px solid rgba(16,185,129,0.2);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1rem;transition:all var(--transition-base)}
+        .ai-insight-card:hover{border-color:rgba(16,185,129,0.4);box-shadow:var(--glow-primary);transform:translateX(4px)}
+        .ai-insight-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem}
+        .ai-insight-icon{width:36px;height:36px;border-radius:var(--radius-sm);background:linear-gradient(135deg,rgba(16,185,129,0.2),rgba(6,182,212,0.1));display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+        .ai-insight-title{font-weight:700;font-size:0.9rem;color:var(--primary-400)}
+        .ai-insight-text{font-size:0.85rem;color:var(--text-secondary);line-height:1.6}
+        .ai-insight-confidence{display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.75rem;padding:0.25rem 0.75rem;background:rgba(16,185,129,0.1);border-radius:var(--radius-full);font-size:0.7rem;font-weight:600;color:var(--primary-400)}
+
+        .map-container{background:var(--gradient-card);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;position:relative;height:300px}
+        .map-placeholder{width:100%;height:100%;background:linear-gradient(135deg,rgba(16,185,129,0.05),rgba(6,182,212,0.05));display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
+        .map-placeholder-icon{font-size:3rem;opacity:0.5}
+        .map-placeholder-text{font-size:0.9rem;color:var(--text-secondary)}
+        .map-overlay{position:absolute;bottom:1rem;left:1rem;right:1rem;display:flex;gap:0.5rem;flex-wrap:wrap}
+        .map-tag{padding:0.4rem 0.75rem;background:var(--bg-glass);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:var(--radius-full);font-size:0.75rem;font-weight:500;color:var(--text-primary)}
+
+        @media(max-width:768px){
+            .sidebar{display:none}
+            .main-wrapper{margin-left:0}
+            .top-nav{padding:0.75rem 1rem}
+            .hero-stats{width:100%;justify-content:space-around}
+            .notification-panel{width:100%}
+            .fab{bottom:1rem;right:1rem}
+        }
+
+        /* Skeleton Loading */
+        .skeleton{background:linear-gradient(90deg,var(--bg-elevated) 25%,var(--bg-card) 50%,var(--bg-elevated) 75%);background-size:200% 100%;animation:skeletonPulse 1.5s infinite;border-radius:var(--radius-md)}
+        @keyframes skeletonPulse{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+        /* Particle Background Effect */
+        .particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+        .particle{position:absolute;width:2px;height:2px;background:rgba(16,185,129,0.3);border-radius:50%;animation:particleFloat 20s infinite linear}
+        @keyframes particleFloat{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-100vh) rotate(720deg);opacity:0}}
+
+        /* Period Select */
+        .period-select{padding:0.5rem 1rem;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--bg-card);color:var(--text-primary);font-size:0.85rem;cursor:pointer;transition:all var(--transition-fast)}
+        .period-select:focus{outline:none;border-color:var(--primary-500)}
+
+        /* Weather Widget */
+        .weather-widget{display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--bg-card);border-radius:var(--radius-lg);border:1px solid var(--border)}
+        .weather-icon{font-size:2.5rem}
+        .weather-info{flex:1}
+        .weather-temp{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700}
+        .weather-desc{font-size:0.8rem;color:var(--text-secondary)}
+        .weather-meta{display:flex;gap:1rem;margin-top:0.5rem;font-size:0.75rem;color:var(--text-secondary)}
+    </style>
+<base target="_blank">
+</head>
+<body data-theme="dark">
+
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Loading Screen -->
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <div class="loader-icon">🌾</div>
+            <h2>Q-Farming 2.0</h2>
+            <p>Initializing AI Agriculture Intelligence...</p>
+            <div class="loader-progress"><div class="loader-progress-fill"></div></div>
+            <div class="loader-dots">
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Container -->
+    <div id="app" class="app hidden">
+
+        <!-- Top Navigation Bar -->
+        <header class="top-nav">
+            <div class="top-nav-brand">
+                <div class="brand-logo">🌾</div>
+                <div class="brand-text">
+                    <span class="brand-name">Q-Farming 2.0</span>
+                    <span class="brand-tagline">AI Smart Agriculture ERP</span>
+                </div>
+            </div>
+            <div class="top-nav-actions">
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    <span>Systems Online</span>
+                </div>
+                <button class="nav-action-btn" onclick="toggleTheme()" title="Toggle Theme">🌓</button>
+                <button class="nav-action-btn" onclick="toggleNotifications()" title="Notifications">
+                    <span>🔔</span>
+                    <span class="badge-dot"></span>
+                </button>
+                <button class="nav-action-btn" onclick="showSyncStatus()" title="Sync Status">☁️</button>
+            </div>
+        </header>
+
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-nav">
+                <button class="sidebar-item active" onclick="switchTab('dashboard')" data-tab="dashboard">
+                    <span class="icon">📊</span>
+                    <span class="label">Dashboard</span>
+                </button>
+                <button class="sidebar-item" onclick="switchTab('fields')" data-tab="fields">
+                    <span class="icon">🚜</span>
+                    <span class="label">Fields</span>
+                </button>
+                <button class="sidebar-item" onclick="switchTab('inventory')" data-tab="inventory">
+                    <span class="icon">📦</span>
+                    <span class="label">Inventory</span>
+                </button>
+                <button class="sidebar-item" onclick="switchTab('sensors')" data-tab="sensors">
+                    <span class="icon">📡</span>
+                    <span class="label">IoT Sensors</span>
+                </button>
+                <button class="sidebar-item" onclick="switchTab('workers')" data-tab="workers">
+                    <span class="icon">👷</span>
+                    <span class="label">Workers</span>
+                </button>
+                <button class="sidebar-item" onclick="switchTab('analytics')" data-tab="analytics">
+                    <span class="icon">📈</span>
+                    <span class="label">Analytics</span>
+                </button>
+                <div class="sidebar-divider"></div>
+                <button class="sidebar-item" onclick="switchTab('calendar')" data-tab="calendar">
+                    <span class="icon">📅</span>
+                    <span class="label">Calendar</span>
+                </button>
+                <button class="sidebar-item" onclick="switchTab('ai')" data-tab="ai">
+                    <span class="icon">🤖</span>
+                    <span class="label">AI Insights</span>
+                </button>
+                <button class="sidebar-item" onclick="switchTab('settings')" data-tab="settings">
+                    <span class="icon">⚙️</span>
+                    <span class="label">Settings</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Notification Panel -->
+        <div class="notification-panel" id="notification-panel">
+            <div class="notification-panel-header">
+                <span class="notification-panel-title">🔔 Notifications</span>
+                <button class="modal-close" onclick="toggleNotifications()">×</button>
+            </div>
+            <div id="notification-list">
+                <div class="notification-item unread">
+                    <div class="notification-icon" style="background:linear-gradient(135deg,rgba(16,185,129,0.2),rgba(16,185,129,0.05))">💧</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Irrigation Complete</div>
+                        <div class="notification-desc">Field A - Wheat irrigation cycle completed successfully</div>
+                        <div class="notification-time">2 minutes ago</div>
+                    </div>
+                </div>
+                <div class="notification-item unread">
+                    <div class="notification-icon" style="background:linear-gradient(135deg,rgba(245,158,11,0.2),rgba(245,158,11,0.05))">⚠️</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Weather Alert</div>
+                        <div class="notification-desc">High temperature expected tomorrow - 38°C peak</div>
+                        <div class="notification-time">15 minutes ago</div>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-icon" style="background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(59,130,246,0.05))">📦</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Low Stock Alert</div>
+                        <div class="notification-desc">NPK Fertilizer stock below threshold (12 bags remaining)</div>
+                        <div class="notification-time">1 hour ago</div>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-icon" style="background:linear-gradient(135deg,rgba(16,185,129,0.2),rgba(16,185,129,0.05))">🌾</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Harvest Ready</div>
+                        <div class="notification-desc">Field C - Oats at 92% maturity, ready for harvest</div>
+                        <div class="notification-time">3 hours ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Wrapper -->
+        <div class="main-wrapper">
+            <main class="main-content">
+
+                <!-- DASHBOARD TAB -->
+                <section id="tab-dashboard" class="tab-section active">
+
+                    <!-- Hero Banner -->
+                    <div class="hero-section">
+                        <div class="hero-content">
+                            <div class="hero-text">
+                                <h1>Good Morning, Farm Manager</h1>
+                                <p>Your AI-powered agriculture dashboard is live. All systems operational across 3 active fields.</p>
+                                <div class="hero-ai-badge">
+                                    <span class="ai-dot"></span>
+                                    <span>AI Optimization Active</span>
+                                </div>
+                            </div>
+                            <div class="hero-stats">
+                                <div class="hero-stat">
+                                    <div class="hero-stat-value">3</div>
+                                    <div class="hero-stat-label">Active Fields</div>
+                                </div>
+                                <div class="hero-stat">
+                                    <div class="hero-stat-value">12</div>
+                                    <div class="hero-stat-label">IoT Sensors</div>
+                                </div>
+                                <div class="hero-stat">
+                                    <div class="hero-stat-value">87%</div>
+                                    <div class="hero-stat-label">Efficiency</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KPI Cards -->
+                    <div class="kpi-grid">
+                        <div class="kpi-card" onclick="showDetail('yield')">
+                            <div class="kpi-card-header">
+                                <div class="kpi-icon-wrapper yield">🌾</div>
+                                <span class="kpi-trend-badge up">↑ 8.3%</span>
+                            </div>
+                            <div class="kpi-value" id="kpi-yield">12.4</div>
+                            <div class="kpi-label">tons/ha Current Yield</div>
+                            <div class="kpi-sub">Optimal harvest window in 12 days</div>
+                        </div>
+
+                        <div class="kpi-card" onclick="showDetail('water')">
+                            <div class="kpi-card-header">
+                                <div class="kpi-icon-wrapper water">💧</div>
+                                <span class="kpi-trend-badge down">↓ 12%</span>
+                            </div>
+                            <div class="kpi-value" id="kpi-water">2,450</div>
+                            <div class="kpi-label">L/day Water Usage</div>
+                            <div class="kpi-sub">Drip irrigation efficiency at 87%</div>
+                        </div>
+
+                        <div class="kpi-card" onclick="showDetail('weather')">
+                            <div class="kpi-card-header">
+                                <div class="kpi-icon-wrapper weather">☀️</div>
+                                <span class="kpi-trend-badge up">32°C</span>
+                            </div>
+                            <div class="kpi-value" id="kpi-temp">Sunny</div>
+                            <div class="kpi-label">Weather Algiers</div>
+                            <div class="kpi-sub">Humidity 45% | Wind 12km/h NE</div>
+                        </div>
+
+                        <div class="kpi-card" onclick="showDetail('revenue')">
+                            <div class="kpi-card-header">
+                                <div class="kpi-icon-wrapper revenue">💰</div>
+                                <span class="kpi-trend-badge up">↑ 15%</span>
+                            </div>
+                            <div class="kpi-value" id="kpi-revenue">1.2M</div>
+                            <div class="kpi-label">DZD Revenue</div>
+                            <div class="kpi-sub">Net profit margin: 43.3%</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="glass-card" style="margin-bottom:1.5rem">
+                        <div class="glass-card-header">
+                            <div class="glass-card-title">
+                                <div class="glass-card-title-icon">⚡</div>
+                                Quick Actions
+                            </div>
+                        </div>
+                        <div class="action-grid">
+                            <button class="action-btn" onclick="openModal('irrigation')">
+                                <span class="icon">💧</span>
+                                <span class="label">Start Irrigation</span>
+                                <span class="sub">Field A scheduled</span>
+                            </button>
+                            <button class="action-btn" onclick="openModal('fertilizer')">
+                                <span class="icon">🧪</span>
+                                <span class="label">Apply Fertilizer</span>
+                                <span class="sub">NPK recommended</span>
+                            </button>
+                            <button class="action-btn" onclick="openModal('harvest')">
+                                <span class="icon">🌾</span>
+                                <span class="label">Log Harvest</span>
+                                <span class="sub">Field C ready</span>
+                            </button>
+                            <button class="action-btn" onclick="openModal('alert')">
+                                <span class="icon">🔔</span>
+                                <span class="label">Set Alert</span>
+                                <span class="sub">Weather warning</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Two Column Layout -->
+                    <div class="grid-2">
+                        <!-- Live Activity Feed -->
+                        <div class="glass-card">
+                            <div class="glass-card-header">
+                                <div class="glass-card-title">
+                                    <div class="glass-card-title-icon">📋</div>
+                                    Recent Activity
+                                </div>
+                                <span class="live-indicator">
+                                    <span class="live-pulse"></span>
+                                    LIVE
+                                </span>
+                            </div>
+                            <div class="activity-list" id="activity-list">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Weather Widget -->
+                        <div class="glass-card">
+                            <div class="glass-card-header">
+                                <div class="glass-card-title">
+                                    <div class="glass-card-title-icon">🌤️</div>
+                                    Weather Forecast
+                                </div>
+                            </div>
+                            <div class="weather-widget">
+                                <span class="weather-icon">☀️</span>
+                                <div class="weather-info">
+                                    <div class="weather-temp">32°C</div>
+                                    <div class="weather-desc">Sunny - Algiers, Algeria</div>
+                                    <div class="weather-meta">
+                                        <span>💧 45% Humidity</span>
+                                        <span>💨 12km/h NE</span>
+                                        <span>👁️ 10km Visibility</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top:1rem;display:flex;gap:0.5rem;justify-content:space-between">
+                                <div style="text-align:center;padding:0.5rem">
+                                    <div style="font-size:1.5rem">🌤️</div>
+                                    <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:0.25rem">Tomorrow</div>
+                                    <div style="font-size:0.85rem;font-weight:600;margin-top:0.25rem">34°C</div>
+                                </div>
+                                <div style="text-align:center;padding:0.5rem">
+                                    <div style="font-size:1.5rem">⛅</div>
+                                    <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:0.25rem">Wed</div>
+                                    <div style="font-size:0.85rem;font-weight:600;margin-top:0.25rem">31°C</div>
+                                </div>
+                                <div style="text-align:center;padding:0.5rem">
+                                    <div style="font-size:1.5rem">🌧️</div>
+                                    <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:0.25rem">Thu</div>
+                                    <div style="font-size:0.85rem;font-weight:600;margin-top:0.25rem">28°C</div>
+                                </div>
+                                <div style="text-align:center;padding:0.5rem">
+                                    <div style="font-size:1.5rem">☀️</div>
+                                    <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:0.25rem">Fri</div>
+                                    <div style="font-size:0.85rem;font-weight:600;margin-top:0.25rem">33°C</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FIELDS TAB -->
+                <section id="tab-fields" class="tab-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <span class="section-title-icon">🚜</span>
+                            Field Management
+                        </div>
+                        <button class="btn-primary" onclick="openModal('add-field')">+ Add Field</button>
+                    </div>
+
+                    <div class="search-bar">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" placeholder="Search fields by name, crop, or location..." id="field-search" onkeyup="filterFields()">
+                    </div>
+
+                    <div class="field-grid" id="field-list">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <!-- Map Section -->
+                    <div class="glass-card" style="margin-top:1.5rem">
+                        <div class="glass-card-header">
+                            <div class="glass-card-title">
+                                <div class="glass-card-title-icon">🗺️</div>
+                                Field Map & GPS Tracking
+                            </div>
+                        </div>
+                        <div class="map-container">
+                            <div class="map-placeholder">
+                                <span class="map-placeholder-icon">🗺️</span>
+                                <span class="map-placeholder-text">Interactive Map - GPS Coordinates Active</span>
+                                <span style="font-size:0.75rem;color:var(--text-secondary)">Algiers, Algeria | 3 Fields Tracked</span>
+                            </div>
+                            <div class="map-overlay">
+                                <span class="map-tag">📍 Field A - 36.75°N, 3.06°E</span>
+                                <span class="map-tag">📍 Field B - 36.72°N, 3.08°E</span>
+                                <span class="map-tag">📍 Field C - 36.48°N, 2.83°E</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- INVENTORY TAB -->
+                <section id="tab-inventory" class="tab-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <span class="section-title-icon">📦</span>
+                            Inventory & Resources
+                        </div>
+                        <button class="btn-primary" onclick="openModal('add-item')">+ Add Item</button>
+                    </div>
+
+                    <div class="cat-filter">
+                        <button class="cat-btn active" onclick="filterInventory('all')">All</button>
+                        <button class="cat-btn" onclick="filterInventory('seeds')">🌱 Seeds</button>
+                        <button class="cat-btn" onclick="filterInventory('fertilizer')">🧪 Fertilizer</button>
+                        <button class="cat-btn" onclick="filterInventory('equipment')">🔧 Equipment</button>
+                        <button class="cat-btn" onclick="filterInventory('pesticide')">🛡️ Pesticide</button>
+                    </div>
+
+                    <div class="inventory-grid" id="inventory-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <!-- IOT SENSORS TAB -->
+                <section id="tab-sensors" class="tab-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <span class="section-title-icon">📡</span>
+                            IoT Sensor Network
+                        </div>
+                        <span class="live-indicator">
+                            <span class="live-pulse"></span>
+                            LIVE DATA
+                        </span>
+                    </div>
+
+                    <div class="sensor-grid" id="sensor-grid">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <div class="glass-card" style="margin-top:1.5rem">
+                        <div class="glass-card-header">
+                            <div class="glass-card-title">
+                                <div class="glass-card-title-icon">📊</div>
+                                Sensor Data Trends
+                            </div>
+                            <select class="period-select" onchange="updateSensorChart()">
+                                <option>Last 24 Hours</option>
+                                <option>Last 7 Days</option>
+                                <option>Last 30 Days</option>
+                            </select>
+                        </div>
+                        <div class="chart-container" id="sensor-chart-container">
+                            <svg class="chart-svg" viewBox="0 0 600 200" id="sensor-chart-svg">
+                                <!-- Populated by JS -->
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- WORKERS TAB -->
+                <section id="tab-workers" class="tab-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <span class="section-title-icon">👷</span>
+                            Worker Management
+                        </div>
+                        <button class="btn-primary" onclick="openModal('add-worker')">+ Add Worker</button>
+                    </div>
+
+                    <div class="worker-grid" id="worker-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <!-- ANALYTICS TAB -->
+                <section id="tab-analytics" class="tab-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <span class="section-title-icon">📈</span>
+                            Analytics & Reports
+                        </div>
+                        <select class="period-select" id="analytics-period" onchange="updateAnalytics()">
+                            <option value="7">Last 7 Days</option>
+                            <option value="30">Last 30 Days</option>
+                            <option value="90">Last Quarter</option>
+                            <option value="365">Last Year</option>
+                        </select>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="glass-card">
+                            <div class="glass-card-header">
+                                <div class="glass-card-title">
+                                    <div class="glass-card-title-icon">📊</div>
+                                    Yield Performance (tons/ha)
+                                </div>
+                            </div>
+                            <div class="bar-chart-container" id="yield-chart">
+                                <!-- Populated by JS -->
+                            </div>
+                            <div class="chart-legend">
+                                <span class="legend-item"><span class="legend-dot" style="background:#2d6a4f"></span> Wheat</span>
+                                <span class="legend-item"><span class="legend-dot" style="background:#40916c"></span> Barley</span>
+                                <span class="legend-item"><span class="legend-dot" style="background:#74c69d"></span> Oats</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-card">
+                            <div class="glass-card-header">
+                                <div class="glass-card-title">
+                                    <div class="glass-card-title-icon">⚡</div>
+                                    Resource Efficiency
+                                </div>
+                            </div>
+                            <div class="efficiency-list">
+                                <div class="efficiency-item">
+                                    <div class="efficiency-header">
+                                        <span class="efficiency-name">Water Efficiency</span>
+                                        <span class="efficiency-value">87%</span>
+                                    </div>
+                                    <div class="progress-track">
+                                        <div class="progress-fill water" style="width:87%"></div>
+                                    </div>
+                                </div>
+                                <div class="efficiency-item">
+                                    <div class="efficiency-header">
+                                        <span class="efficiency-name">Fertilizer Utilization</span>
+                                        <span class="efficiency-value">72%</span>
+                                    </div>
+                                    <div class="progress-track">
+                                        <div class="progress-fill fertilizer" style="width:72%"></div>
+                                    </div>
+                                </div>
+                                <div class="efficiency-item">
+                                    <div class="efficiency-header">
+                                        <span class="efficiency-name">Energy Consumption</span>
+                                        <span class="efficiency-value">65%</span>
+                                    </div>
+                                    <div class="progress-track">
+                                        <div class="progress-fill energy" style="width:65%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card" style="margin-top:1.5rem">
+                        <div class="glass-card-header">
+                            <div class="glass-card-title">
+                                <div class="glass-card-title-icon">📉</div>
+                                Revenue Trend
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <svg class="chart-svg" viewBox="0 0 600 200" id="revenue-chart">
+                                <!-- Populated by JS -->
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CALENDAR TAB -->
+                <section id="tab-calendar" class="tab-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <span class="section-title-icon">📅</span>
+                            Smart Calendar & Scheduling
+                        </div>
+                        <button class="btn-primary" onclick="openModal('add-event')">+ Add Event</button>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="calendar-widget">
+                            <div class="calendar-header">
+                                <span class="calendar-month">May 2026</span>
+                                <div class="calendar-nav">
+                                    <button>◀</button>
+                                    <button>▶</button>
+                                </div>
+                            </div>
+                            <div class="calendar-grid">
+                                <span class="calendar-day-label">Sun</span>
+                                <span class="calendar-day-label">Mon</span>
+                                <span class="calendar-day-label">Tue</span>
+                                <span class="calendar-day-label">Wed</span>
+                                <span class="calendar-day-label">Thu</span>
+                                <span class="calendar-day-label">Fri</span>
+                                <span class="calendar-day-label">Sat</span>
+                                <!-- Days populated by JS -->
+                            </div>
+                            <div id="calendar-days" class="calendar-grid" style="margin-top:0.25rem">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <div class="glass-card">
+                            <div class="glass-card-header">
+                                <div class="glass-card-title">
+                                    <div class="glass-card-title-icon">📋</div>
+                                    Upcoming Tasks
+                                </div>
+                            </div>
+                            <div class="activity-list" id="calendar-tasks">
+                                <div class="activity-item">
+                                    <div class="activity-icon info" style="background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(59,130,246,0.05))">💧</div>
+                                    <div class="activity-info">
+                                        <div class="activity-title">Irrigation - Field A</div>
+                                        <div class="activity-time">Tomorrow, 06:00 AM</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon warning" style="background:linear-gradient(135deg,rgba(245,158,11,0.2),rgba(245,158,11,0.05))">🧪</div>
+                                    <div class="activity-info">
+                                        <div class="activity-title">Fertilizer Application - Field B</div>
+                                        <div class="activity-time">Wed, 08:00 AM</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon success" style="background:linear-gradient(135deg,rgba(16,185,129,0.2),rgba(16,185,129,0.05))">🌾</div>
+                                    <div class="activity-info">
+                                        <div class="activity-title">Harvest - Field C</div>
+                                        <div class="activity-time">Fri, 05:00 AM</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon info" style="background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(59,130,246,0.05))">🔧</div>
+                                    <div class="activity-info">
+                                        <div class="activity-title">Equipment Maintenance</div>
+                                        <div class="activity-time">Sat, 10:00 AM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AI INSIGHTS TAB -->
+                <section id="tab-ai" class="tab-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <span class="section-title-icon">🤖</span>
+                            AI Optimization & Predictions
+                        </div>
+                        <div class="hero-ai-badge">
+                            <span class="ai-dot"></span>
+                            <span>AI Engine Active</span>
+                        </div>
+                    </div>
+
+                    <div class="ai-insight-card">
+                        <div class="ai-insight-header">
+                            <div class="ai-insight-icon">💧</div>
+                            <span class="ai-insight-title">Water Optimization Recommendation</span>
+                        </div>
+                        <p class="ai-insight-text">Based on soil moisture sensors and weather forecast, AI recommends reducing irrigation by 15% for Field A. Current soil moisture at 68% is above optimal threshold. Estimated water savings: 367L/day.</p>
+                        <span class="ai-insight-confidence">✨ 94% Confidence</span>
+                    </div>
+
+                    <div class="ai-insight-card">
+                        <div class="ai-insight-header">
+                            <div class="ai-insight-icon">🌾</div>
+                            <span class="ai-insight-title">Harvest Prediction</span>
+                        </div>
+                        <p class="ai-insight-text">Field C (Oats) is predicted to reach optimal harvest maturity in 3 days. Current growth stage: 92% complete. Weather forecast shows favorable conditions. Recommended harvest window: June 2-4, 2026.</p>
+                        <span class="ai-insight-confidence">✨ 91% Confidence</span>
+                    </div>
+
+                    <div class="ai-insight-card">
+                        <div class="ai-insight-header">
+                            <div class="ai-insight-icon">🧪</div>
+                            <span class="ai-insight-title">Fertilizer Schedule Optimization</span>
+                        </div>
+                        <p class="ai-insight-text">Nitrogen levels in Field B are declining faster than projected. AI suggests advancing next fertilizer application by 2 days. Current NPK balance: N-45%, P-32%, K-38%. Target: N-50%, P-30%, K-35%.</p>
+                        <span class="ai-insight-confidence">✨ 88% Confidence</span>
+                    </div>
+
+                    <div class="ai-insight-card">
+                        <div class="ai-insight-header">
+                            <div class="ai-insight-icon">⚠️</div>
+                            <span class="ai-insight-title">Weather Risk Alert</span>
+                        </div>
+                        <p class="ai-insight-text">High probability of heatwave (38°C+) in next 48 hours. AI recommends activating shade nets for sensitive crops and increasing evening irrigation cycles. UV index expected to reach 9+ on Thursday.</p>
+                        <span class="ai-insight-confidence">✨ 87% Confidence</span>
+                    </div>
+
+                    <div class="grid-2" style="margin-top:1.5rem">
+                        <div class="glass-card">
+                            <div class="glass-card-header">
+                                <div class="glass-card-title">
+                                    <div class="glass-card-title-icon">📊</div>
+                                    AI Prediction Accuracy
+                                </div>
+                            </div>
+                            <div style="text-align:center;padding:2rem">
+                                <div style="font-family:'Space Grotesk',sans-serif;font-size:3rem;font-weight:700;background:linear-gradient(135deg,var(--primary-400),var(--cyan-400));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">92.4%</div>
+                                <div style="font-size:0.85rem;color:var(--text-secondary);margin-top:0.5rem">Overall AI prediction accuracy this quarter</div>
+                                <div style="margin-top:1rem;display:flex;gap:1rem;justify-content:center">
+                                    <div style="text-align:center">
+                                        <div style="font-weight:700;color:var(--primary-400)">94%</div>
+                                        <div style="font-size:0.7rem;color:var(--text-secondary)">Yield</div>
+                                    </div>
+                                    <div style="text-align:center">
+                                        <div style="font-weight:700;color:var(--cyan-400)">89%</div>
+                                        <div style="font-size:0.7rem;color:var(--text-secondary)">Weather</div>
+                                    </div>
+                                    <div style="text-align:center">
+                                        <div style="font-weight:700;color:var(--blue-400)">91%</div>
+                                        <div style="font-size:0.7rem;color:var(--text-secondary)">Resources</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card">
+                            <div class="glass-card-header">
+                                <div class="glass-card-title">
+                                    <div class="glass-card-title-icon">💰</div>
+                                    AI Revenue Impact
+                                </div>
+                            </div>
+                            <div style="padding:1rem">
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+                                    <span style="font-size:0.85rem;color:var(--text-secondary)">Cost Savings (AI Optimized)</span>
+                                    <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--primary-400)">+187K DZD</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+                                    <span style="font-size:0.85rem;color:var(--text-secondary)">Yield Improvement</span>
+                                    <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--primary-400)">+8.3%</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+                                    <span style="font-size:0.85rem;color:var(--text-secondary)">Water Reduction</span>
+                                    <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--cyan-400)">-12%</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center">
+                                    <span style="font-size:0.85rem;color:var(--text-secondary)">Resource Efficiency</span>
+                                    <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--blue-400)">+15%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SETTINGS TAB -->
+                <section id="tab-settings" class="tab-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <span class="section-title-icon">⚙️</span>
+                            System Settings
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <div class="settings-group-title">🌐 Connectivity</div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Offline Mode</label>
+                                <p>Work without internet connection</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" checked id="offline-mode" onchange="toggleOffline()">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Auto-Sync</label>
+                                <p>Sync when connection is available</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" checked id="auto-sync" onchange="toggleAutoSync()">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <div class="settings-group-title">📍 Location</div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Farm Location</label>
+                                <p id="farm-location">Algiers, Algeria</p>
+                            </div>
+                            <button class="btn-secondary" onclick="updateLocation()">Update</button>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>GPS Tracking</label>
+                                <p>Track field boundaries and equipment</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" checked id="gps-tracking">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <div class="settings-group-title">🤖 AI Preferences</div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>AI Notifications</label>
+                                <p>Receive AI-powered recommendations</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" checked id="ai-notifications">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Predictive Analytics</label>
+                                <p>Enable yield and weather predictions</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" checked id="predictive-analytics">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <div class="settings-group-title">📊 Data Management</div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Export Data</label>
+                                <p>Download all farm data as CSV</p>
+                            </div>
+                            <button class="btn-secondary" onclick="exportData()">Export</button>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Clear Cache</label>
+                                <p>Reset all local data</p>
+                            </div>
+                            <button class="btn-danger" onclick="clearCache()">Clear</button>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <div class="settings-group-title">ℹ️ About</div>
+                        <div class="about-card">
+                            <div class="about-logo">🌾</div>
+                            <h4>Q-Farming 2.0</h4>
+                            <p>AI-Powered Smart Agriculture ERP</p>
+                            <p class="version">Version 2.0.1 | Industrial Engineering Project</p>
+                            <p class="author">Built for Algerian Rural Agriculture</p>
+                            <div style="margin-top:1rem;display:flex;gap:0.5rem;justify-content:center">
+                                <span class="map-tag">🌐 Offline Ready</span>
+                                <span class="map-tag">🤖 AI Powered</span>
+                                <span class="map-tag">📡 IoT Connected</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Floating Action Button -->
+        <button class="fab" onclick="openModal('quick-action')" title="Quick Actions">+</button>
+
+        <!-- Modal Overlay -->
+        <div id="modal-overlay" class="modal-overlay">
+            <div class="modal-backdrop" onclick="closeModal()"></div>
+            <div class="modal-content" id="modal-body">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+
+        <!-- Toast Container -->
+        <div class="toast-container" id="toast-container"></div>
+    </div>
+
+    <script>
+    // ============================================
+    // Q-FARMING 2.0 - PREMIUM AI AGRICULTURE ERP
+    // World-Class JavaScript Application
+    // ============================================
+
+    const AppState = {
+        currentTab: 'dashboard',
+        theme: localStorage.getItem('qf-theme') || 'dark',
+        offline: true,
+        notificationsOpen: false,
+        fields: JSON.parse(localStorage.getItem('qf-fields')) || [
+            { id: 1, name: 'Field A - Wheat', crop: 'Wheat', size: 12.5, status: 'active', progress: 78, location: 'Algiers North', lat: '36.75°N', lng: '3.06°E', moisture: 68, temp: 31 },
+            { id: 2, name: 'Field B - Barley', crop: 'Barley', size: 8.3, status: 'irrigation', progress: 45, location: 'Algiers South', lat: '36.72°N', lng: '3.08°E', moisture: 72, temp: 33 },
+            { id: 3, name: 'Field C - Oats', crop: 'Oats', size: 5.0, status: 'harvest', progress: 92, location: 'Blida', lat: '36.48°N', lng: '2.83°E', moisture: 55, temp: 30 }
+        ],
+        inventory: JSON.parse(localStorage.getItem('qf-inventory')) || [
+            { id: 1, name: 'Wheat Seeds', category: 'seeds', stock: 450, unit: 'kg', icon: '🌱', max: 500 },
+            { id: 2, name: 'NPK Fertilizer', category: 'fertilizer', stock: 12, unit: 'bags', icon: '🧪', max: 50 },
+            { id: 3, name: 'Drip Irrigation', category: 'equipment', stock: 3, unit: 'units', icon: '💧', max: 10 },
+            { id: 4, name: 'Barley Seeds', category: 'seeds', stock: 200, unit: 'kg', icon: '🌱', max: 300 },
+            { id: 5, name: 'Organic Compost', category: 'fertilizer', stock: 25, unit: 'bags', icon: '🧪', max: 40 },
+            { id: 6, name: 'Tractor Tires', category: 'equipment', stock: 2, unit: 'pcs', icon: '🔧', max: 8 },
+            { id: 7, name: 'Pesticide A', category: 'pesticide', stock: 8, unit: 'L', icon: '🛡️', max: 20 },
+            { id: 8, name: 'Corn Seeds', category: 'seeds', stock: 320, unit: 'kg', icon: '🌱', max: 400 }
+        ],
+        activities: JSON.parse(localStorage.getItem('qf-activities')) || [
+            { id: 1, title: 'Irrigation completed - Field A', time: '2 hours ago', icon: '💧', type: 'success' },
+            { id: 2, title: 'Fertilizer applied - Field B', time: '5 hours ago', icon: '🧪', type: 'warning' },
+            { id: 3, title: 'Harvest started - Field C', time: '1 day ago', icon: '🌾', type: 'success' },
+            { id: 4, title: 'Weather alert: High temp expected', time: '1 day ago', icon: '☀️', type: 'danger' },
+            { id: 5, title: 'Sensor calibration complete', time: '2 days ago', icon: '📡', type: 'info' },
+            { id: 6, title: 'Inventory restocked - Seeds', time: '3 days ago', icon: '📦', type: 'success' }
+        ],
+        sensors: [
+            { id: 1, name: 'Soil Moisture', value: 68, unit: '%', max: 100, status: 'optimal', color: '#10b981', icon: '💧' },
+            { id: 2, name: 'Temperature', value: 31, unit: '°C', max: 50, status: 'optimal', color: '#f59e0b', icon: '🌡️' },
+            { id: 3, name: 'Humidity', value: 45, unit: '%', max: 100, status: 'optimal', color: '#3b82f6', icon: '💨' },
+            { id: 4, name: 'pH Level', value: 6.8, unit: 'pH', max: 14, status: 'optimal', color: '#8b5cf6', icon: '⚗️' },
+            { id: 5, name: 'Nitrogen', value: 45, unit: '%', max: 100, status: 'warning', color: '#06b6d4', icon: '🧪' },
+            { id: 6, name: 'Light Intensity', value: 850, unit: 'lux', max: 1000, status: 'optimal', color: '#fbbf24', icon: '☀️' },
+            { id: 7, name: 'CO2 Level', value: 420, unit: 'ppm', max: 600, status: 'optimal', color: '#10b981', icon: '🌬️' },
+            { id: 8, name: 'Wind Speed', value: 12, unit: 'km/h', max: 30, status: 'optimal', color: '#60a5fa', icon: '💨' }
+        ],
+        workers: [
+            { id: 1, name: 'Ahmed B.', role: 'Field Manager', status: 'online', avatar: '👨‍🌾' },
+            { id: 2, name: 'Fatima K.', role: 'Agronomist', status: 'online', avatar: '👩‍🔬' },
+            { id: 3, name: 'Karim M.', role: 'Equipment Operator', status: 'busy', avatar: '👷' },
+            { id: 4, name: 'Amina R.', role: 'Data Analyst', status: 'online', avatar: '👩‍💻' },
+            { id: 5, name: 'Youssef T.', role: 'Irrigation Tech', status: 'offline', avatar: '👨‍🔧' },
+            { id: 6, name: 'Sara L.', role: 'Quality Inspector', status: 'online', avatar: '👩‍🔬' }
+        ]
+    };
+
+    // ============================================
+    // INITIALIZATION
+    // ============================================
+    document.addEventListener('DOMContentLoaded', () => {
+        initTheme();
+        createParticles();
+        simulateLoading();
+        renderActivities();
+        renderFields();
+        renderInventory('all');
+        renderSensors();
+        renderWorkers();
+        renderYieldChart();
+        renderRevenueChart();
+        renderSensorChart();
+        renderCalendar();
+        setupServiceWorker();
+    });
+
+    function createParticles() {
+        const container = document.getElementById('particles');
+        if (!container) return;
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 15) + 's';
+            container.appendChild(particle);
+        }
+    }
+
+    function simulateLoading() {
+        setTimeout(() => {
+            document.getElementById('loader').classList.add('hidden');
+            const app = document.getElementById('app');
+            app.classList.remove('hidden');
+            setTimeout(() => app.classList.add('visible'), 50);
+        }, 2800);
+    }
+
+    function initTheme() {
+        document.body.setAttribute('data-theme', AppState.theme);
+    }
+
+    // ============================================
+    // NAVIGATION
+    // ============================================
+    function switchTab(tabName) {
+        AppState.currentTab = tabName;
+        document.querySelectorAll('.sidebar-item').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.tab === tabName);
+        });
+        document.querySelectorAll('.tab-section').forEach(tab => {
+            tab.classList.toggle('active', tab.id === 'tab-' + tabName);
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ============================================
+    // THEME TOGGLE
+    // ============================================
+    function toggleTheme() {
+        AppState.theme = AppState.theme === 'light' ? 'dark' : 'light';
+        document.body.setAttribute('data-theme', AppState.theme);
+        localStorage.setItem('qf-theme', AppState.theme);
+        showToast(AppState.theme === 'dark' ? '🌙 Dark mode enabled' : '☀️ Light mode enabled', 'info');
+    }
+
+    // ============================================
+    // NOTIFICATIONS
+    // ============================================
+    function toggleNotifications() {
+        AppState.notificationsOpen = !AppState.notificationsOpen;
+        document.getElementById('notification-panel').classList.toggle('visible', AppState.notificationsOpen);
+    }
+
+    // ============================================
+    // DASHBOARD FUNCTIONS
+    // ============================================
+    function renderActivities() {
+        const container = document.getElementById('activity-list');
+        if (!container) return;
+        container.innerHTML = AppState.activities.map((act, i) => `
+            <div class="activity-item" style="animation-delay:${i * 0.05}s">
+                <div class="activity-icon ${act.type}">${act.icon}</div>
+                <div class="activity-info">
+                    <div class="activity-title">${act.title}</div>
+                    <div class="activity-time">${act.time}</div>
+                </div>
+                <div class="activity-status ${i < 2 ? 'new' : 'read'}"></div>
+            </div>
+        `).join('');
+    }
+
+    function showDetail(type) {
+        const details = {
+            yield: 'Current yield is 12.4 tons/ha, which is 8.3% above last season. AI predicts optimal harvesting window in 12 days based on moisture and weather data.',
+            water: 'Daily consumption: 2,450L. Drip irrigation efficiency at 87%. AI recommends reducing by 15% for Field A. Next scheduled: Tomorrow 06:00 AM.',
+            weather: 'Algiers: 32°C, Sunny. Humidity: 45%. Wind: 12km/h NE. No precipitation expected for 3 days. UV index: 8. Heatwave warning Thursday.',
+            revenue: 'Total revenue: 1.2M DZD. Operating costs: 680K DZD. Net profit margin: 43.3%. AI-optimized savings: 187K DZD this quarter.'
+        };
+        showModal('AI Insight', `<p style="line-height:1.7;color:var(--text-secondary)">${details[type]}</p><div style="margin-top:1rem;text-align:right"><span class="ai-insight-confidence">✨ AI Generated</span></div>`);
+    }
+
+    // ============================================
+    // FIELDS MANAGEMENT
+    // ============================================
+    function renderFields() {
+        const container = document.getElementById('field-list');
+        if (!container) return;
+        container.innerHTML = AppState.fields.map((field, i) => `
+            <div class="field-card" style="animation:barGrow 0.5s ease-out ${i * 0.1}s both">
+                <div class="field-card-map">
+                    <div class="field-card-map-pattern"></div>
+                    <div style="position:absolute;bottom:0.5rem;left:0.5rem;background:var(--bg-glass);backdrop-filter:blur(8px);padding:0.25rem 0.5rem;border-radius:var(--radius-sm);font-size:0.7rem;color:var(--text-secondary);border:1px solid var(--border)">
+                        📍 ${field.lat}, ${field.lng}
+                    </div>
+                </div>
+                <div class="field-card-content">
+                    <div class="field-card-header">
+                        <span class="field-card-name">${field.name}</span>
+                        <span class="field-card-status ${field.status}">${field.status}</span>
+                    </div>
+                    <div class="field-card-meta">
+                        <span>📍 ${field.location}</span>
+                        <span>📐 ${field.size} ha</span>
+                        <span>🌱 ${field.crop}</span>
+                    </div>
+                    <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem">
+                        <span style="font-size:0.7rem;padding:0.2rem 0.5rem;background:rgba(16,185,129,0.1);border-radius:var(--radius-full);color:var(--primary-400)">💧 ${field.moisture}% moisture</span>
+                        <span style="font-size:0.7rem;padding:0.2rem 0.5rem;background:rgba(245,158,11,0.1);border-radius:var(--radius-full);color:var(--warning)">🌡️ ${field.temp}°C</span>
+                    </div>
+                    <div class="field-card-progress">
+                        <div class="field-card-progress-bar" style="width:${field.progress}%"></div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;margin-top:0.5rem">
+                        <span style="font-size:0.7rem;color:var(--text-secondary)">Growth Progress</span>
+                        <span style="font-size:0.7rem;font-weight:600;color:var(--primary-400)">${field.progress}%</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function filterFields() {
+        const search = document.getElementById('field-search').value.toLowerCase();
+        const items = document.querySelectorAll('.field-card');
+        items.forEach(item => {
+            item.style.display = item.textContent.toLowerCase().includes(search) ? 'block' : 'none';
+        });
+    }
+
+    // ============================================
+    // INVENTORY MANAGEMENT
+    // ============================================
+    function renderInventory(filter) {
+        const container = document.getElementById('inventory-grid');
+        if (!container) return;
+        const items = filter === 'all' ? AppState.inventory : AppState.inventory.filter(i => i.category === filter);
+        container.innerHTML = items.map((item, i) => {
+            const pct = Math.round((item.stock / item.max) * 100);
+            const isLow = item.stock < 20;
+            return `
+            <div class="inventory-card" style="animation:barGrow 0.5s ease-out ${i * 0.05}s both">
+                <div class="inventory-card-icon">${item.icon}</div>
+                <div class="inventory-card-name">${item.name}</div>
+                <div class="inventory-card-stock ${isLow ? 'low' : ''}">${item.stock} ${item.unit} ${isLow ? '⚠️ Low Stock' : ''}</div>
+                <div class="inventory-card-bar">
+                    <div class="inventory-card-bar-fill" style="width:${pct}%;background:linear-gradient(90deg,${isLow ? 'var(--danger)' : 'var(--primary-500)'},${isLow ? '#f97316' : 'var(--cyan-400)'})"></div>
+                </div>
+                <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:0.5rem">${pct}% of capacity</div>
+            </div>
+            `;
+        }).join('');
+    }
+
+    function filterInventory(category) {
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.textContent.toLowerCase().includes(category) || (category === 'all' && btn.textContent === 'All'));
+        });
+        renderInventory(category);
+    }
+
+    // ============================================
+    // IOT SENSORS
+    // ============================================
+    function renderSensors() {
+        const container = document.getElementById('sensor-grid');
+        if (!container) return;
+        const circumference = 2 * Math.PI * 34;
+        container.innerHTML = AppState.sensors.map((sensor, i) => {
+            const pct = Math.min((sensor.value / sensor.max) * 100, 100);
+            const offset = circumference - (pct / 100) * circumference;
+            return `
+            <div class="sensor-card" style="animation:barGrow 0.5s ease-out ${i * 0.05}s both">
+                <div class="sensor-ring">
+                    <svg width="80" height="80" viewBox="0 0 80 80">
+                        <circle class="sensor-ring-bg" cx="40" cy="40" r="34"/>
+                        <circle class="sensor-ring-progress" cx="40" cy="40" r="34" 
+                            stroke="${sensor.color}" 
+                            stroke-dasharray="${circumference}" 
+                            stroke-dashoffset="${offset}"
+                            style="transition:stroke-dashoffset 1.5s ease-out ${i * 0.2}s"/>
+                    </svg>
+                    <div class="sensor-value">${sensor.value}</div>
+                </div>
+                <div class="sensor-label">${sensor.icon} ${sensor.name}</div>
+                <div class="sensor-status ${sensor.status}">${sensor.status.toUpperCase()}</div>
+                <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:0.25rem">${sensor.unit}</div>
+            </div>
+            `;
+        }).join('');
+    }
+
+    function renderSensorChart() {
+        const svg = document.getElementById('sensor-chart-svg');
+        if (!svg) return;
+        const data = [45, 52, 48, 61, 55, 68, 72, 65, 58, 62, 70, 75];
+        const maxVal = 80;
+        const width = 600;
+        const height = 200;
+        const padding = 30;
+        const chartW = width - padding * 2;
+        const chartH = height - padding * 2;
+
+        let path = `M ${padding} ${height - padding - (data[0] / maxVal) * chartH}`;
+        let areaPath = `M ${padding} ${height - padding} L ${padding} ${height - padding - (data[0] / maxVal) * chartH}`;
+
+        data.forEach((val, i) => {
+            const x = padding + (i / (data.length - 1)) * chartW;
+            const y = height - padding - (val / maxVal) * chartH;
+            path += ` L ${x} ${y}`;
+            areaPath += ` L ${x} ${y}`;
+        });
+        areaPath += ` L ${width - padding} ${height - padding} Z`;
+
+        svg.innerHTML = `
+            <defs>
+                <linearGradient id="sensorGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="var(--primary-500)" stop-opacity="0.3"/>
+                    <stop offset="100%" stop-color="var(--primary-500)" stop-opacity="0"/>
+                </linearGradient>
+            </defs>
+            <path d="${areaPath}" fill="url(#sensorGrad)" class="chart-area"/>
+            <path d="${path}" stroke="var(--primary-500)" class="chart-line"/>
+            ${data.map((val, i) => {
+                const x = padding + (i / (data.length - 1)) * chartW;
+                const y = height - padding - (val / maxVal) * chartH;
+                return `<circle cx="${x}" cy="${y}" r="4" fill="var(--primary-500)" stroke="var(--bg)" stroke-width="2"/>`;
+            }).join('')}
+        `;
+    }
+
+    function updateSensorChart() {
+        showToast('📊 Sensor data updated for selected period', 'info');
+    }
+
+    // ============================================
+    // WORKERS
+    // ============================================
+    function renderWorkers() {
+        const container = document.getElementById('worker-grid');
+        if (!container) return;
+        container.innerHTML = AppState.workers.map((worker, i) => `
+            <div class="worker-card" style="animation:barGrow 0.5s ease-out ${i * 0.05}s both">
+                <div class="worker-avatar">${worker.avatar}</div>
+                <div class="worker-name">${worker.name}</div>
+                <div class="worker-role">${worker.role}</div>
+                <span class="worker-status ${worker.status}">
+                    <span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;margin-right:0.25rem"></span>
+                    ${worker.status}
+                </span>
+            </div>
+        `).join('');
+    }
+
+    // ============================================
+    // ANALYTICS CHARTS
+    // ============================================
+    function renderYieldChart() {
+        const container = document.getElementById('yield-chart');
+        if (!container) return;
+        const data = [
+            { label: 'Jan', wheat: 30, barley: 20, oats: 15 },
+            { label: 'Feb', wheat: 45, barley: 35, oats: 25 },
+            { label: 'Mar', wheat: 60, barley: 50, oats: 40 },
+            { label: 'Apr', wheat: 75, barley: 65, oats: 55 },
+            { label: 'May', wheat: 90, barley: 80, oats: 70 },
+            { label: 'Jun', wheat: 100, barley: 95, oats: 85 }
+        ];
+        container.innerHTML = data.map((d, i) => `
+            <div class="bar-group" style="animation-delay:${i * 0.1}s">
+                <div class="bar-stack">
+                    <div class="bar" style="height:${d.wheat}%;background:linear-gradient(180deg,#2d6a4f,#40916c);animation-delay:${i * 0.1}s">
+                        <span class="bar-value">${d.wheat}</span>
+                    </div>
+                    <div class="bar" style="height:${d.barley}%;background:linear-gradient(180deg,#40916c,#52b788);animation-delay:${i * 0.1 + 0.05}s">
+                        <span class="bar-value">${d.barley}</span>
+                    </div>
+                    <div class="bar" style="height:${d.oats}%;background:linear-gradient(180deg,#74c69d,#95d5b2);animation-delay:${i * 0.1 + 0.1}s">
+                        <span class="bar-value">${d.oats}</span>
+                    </div>
+                </div>
+                <span class="bar-label">${d.label}</span>
+            </div>
+        `).join('');
+    }
+
+    function renderRevenueChart() {
+        const svg = document.getElementById('revenue-chart');
+        if (!svg) return;
+        const data = [680, 720, 850, 920, 1050, 1200];
+        const maxVal = 1400;
+        const width = 600;
+        const height = 200;
+        const padding = 30;
+        const chartW = width - padding * 2;
+        const chartH = height - padding * 2;
+
+        let path = `M ${padding} ${height - padding - (data[0] / maxVal) * chartH}`;
+        let areaPath = `M ${padding} ${height - padding} L ${padding} ${height - padding - (data[0] / maxVal) * chartH}`;
+
+        data.forEach((val, i) => {
+            const x = padding + (i / (data.length - 1)) * chartW;
+            const y = height - padding - (val / maxVal) * chartH;
+            path += ` L ${x} ${y}`;
+            areaPath += ` L ${x} ${y}`;
+        });
+        areaPath += ` L ${width - padding} ${height - padding} Z`;
+
+        svg.innerHTML = `
+            <defs>
+                <linearGradient id="revenueGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="var(--cyan-500)" stop-opacity="0.3"/>
+                    <stop offset="100%" stop-color="var(--cyan-500)" stop-opacity="0"/>
+                </linearGradient>
+            </defs>
+            <path d="${areaPath}" fill="url(#revenueGrad)" class="chart-area"/>
+            <path d="${path}" stroke="var(--cyan-500)" class="chart-line"/>
+            ${data.map((val, i) => {
+                const x = padding + (i / (data.length - 1)) * chartW;
+                const y = height - padding - (val / maxVal) * chartH;
+                return `<circle cx="${x}" cy="${y}" r="5" fill="var(--cyan-500)" stroke="var(--bg)" stroke-width="2"/>`;
+            }).join('')}
+        `;
+    }
+
+    function updateAnalytics() {
+        showToast('📊 Analytics updated for selected period', 'info');
+    }
+
+    // ============================================
+    // CALENDAR
+    // ============================================
+    function renderCalendar() {
+        const container = document.getElementById('calendar-days');
+        if (!container) return;
+        const daysInMonth = 31;
+        const startDay = 4; // May 2026 starts on Thursday
+        let html = '';
+
+        // Empty cells for days before start
+        for (let i = 0; i < startDay; i++) {
+            html += '<span class="calendar-day other-month"></span>';
+        }
+
+        // Days of month
+        const events = [5, 12, 18, 25, 28]; // Days with events
+        const today = 30; // Today
+
+        for (let day = 1; day <= daysInMonth; day++) {
+            const hasEvent = events.includes(day);
+            const isToday = day === today;
+            html += `<span class="calendar-day ${isToday ? 'today' : ''} ${hasEvent ? 'has-event' : ''}">${day}</span>`;
+        }
+
+        container.innerHTML = html;
+    }
+
+    // ============================================
+    // SETTINGS
+    // ============================================
+    function toggleOffline() {
+        AppState.offline = document.getElementById('offline-mode').checked;
+        showToast(AppState.offline ? '📴 Offline mode enabled' : '🌐 Online mode enabled', 'info');
+    }
+
+    function toggleAutoSync() {
+        const enabled = document.getElementById('auto-sync').checked;
+        showToast(enabled ? '🔄 Auto-sync enabled' : '⏸️ Auto-sync disabled', 'info');
+    }
+
+    function updateLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                pos => {
+                    const loc = pos.coords.latitude.toFixed(4) + '°N, ' + pos.coords.longitude.toFixed(4) + '°E';
+                    document.getElementById('farm-location').textContent = loc;
+                    showToast('📍 Location updated via GPS', 'success');
+                },
+                () => showToast('❌ Location access denied', 'error')
+            );
+        } else {
+            showToast('❌ GPS not supported', 'error');
+        }
+    }
+
+    function exportData() {
+        const data = { fields: AppState.fields, inventory: AppState.inventory, activities: AppState.activities, exported: new Date().toISOString() };
+        const csv = convertToCSV(data);
+        downloadFile(csv, 'q-farming-data.csv', 'text/csv');
+        showToast('📥 Data exported successfully', 'success');
+    }
+
+    function convertToCSV(data) {
+        let csv = 'Q-Farming 2.0 Data Export\n\n';
+        csv += 'FIELDS\nName,Crop,Size (ha),Status,Progress,Location,Latitude,Longitude\n';
+        data.fields.forEach(f => { csv += `${f.name},${f.crop},${f.size},${f.status},${f.progress}%,${f.location},${f.lat},${f.lng}\n`; });
+        csv += '\nINVENTORY\nName,Category,Stock,Unit,Max Capacity\n';
+        data.inventory.forEach(i => { csv += `${i.name},${i.category},${i.stock},${i.unit},${i.max}\n`; });
+        return csv;
+    }
+
+    function downloadFile(content, filename, type) {
+        const blob = new Blob([content], { type });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    function clearCache() {
+        if (confirm('⚠️ Are you sure? This will delete all local data!')) {
+            localStorage.clear();
+            showToast('🗑️ Cache cleared. Reloading...', 'warning');
+            setTimeout(() => location.reload(), 1500);
+        }
+    }
+
+    function showSyncStatus() {
+        showModal('Sync Status', `
+            <div style="text-align:center;padding:1rem">
+                <div style="font-size:3rem;margin-bottom:1rem">☁️</div>
+                <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:700;margin-bottom:0.5rem">All Systems Operational</h3>
+                <p style="color:var(--text-secondary);margin:0.5rem 0">Last sync: 2 minutes ago</p>
+                <p style="color:var(--text-secondary)">Pending changes: 0</p>
+                <div style="margin-top:1rem;padding:1rem;background:var(--bg-card);border-radius:var(--radius-md);border:1px solid var(--border)">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem"><span>Fields</span><span style="color:var(--success)">✓ Synced</span></div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem"><span>Inventory</span><span style="color:var(--success)">✓ Synced</span></div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem"><span>Sensors</span><span style="color:var(--success)">✓ Synced</span></div>
+                    <div style="display:flex;justify-content:space-between"><span>Activities</span><span style="color:var(--success)">✓ Synced</span></div>
+                </div>
+            </div>
+        `);
+    }
+
+    // ============================================
+    // MODAL SYSTEM
+    // ============================================
+    function openModal(type) {
+        const modals = {
+            irrigation: {
+                title: '💧 Start Irrigation',
+                body: `
+                    <div class="form-group"><label>Select Field</label><select id="irr-field">${AppState.fields.map(f => `<option value="${f.id}">${f.name}</option>`).join('')}</select></div>
+                    <div class="form-group"><label>Duration (minutes)</label><input type="number" value="30" min="5" max="120"></div>
+                    <div class="form-group"><label>Water Amount (Liters)</label><input type="number" value="500" min="100" max="5000"></div>
+                    <div class="form-group"><label>AI Recommendation</label><div style="padding:0.75rem;background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(6,182,212,0.05));border:1px solid rgba(16,185,129,0.2);border-radius:var(--radius-md);font-size:0.85rem;color:var(--text-secondary)">💡 AI suggests 420L for Field A based on current soil moisture (68%)</div></div>
+                    <button class="btn-primary" style="width:100%" onclick="submitAction('Irrigation started successfully')">Start Irrigation</button>
+                `
+            },
+            fertilizer: {
+                title: '🧪 Apply Fertilizer',
+                body: `
+                    <div class="form-group"><label>Fertilizer Type</label><select><option>NPK 20-20-20</option><option>Urea 46%</option><option>Organic Compost</option></select></div>
+                    <div class="form-group"><label>Quantity (kg)</label><input type="number" value="50" min="1"></div>
+                    <div class="form-group"><label>Target Field</label><select>${AppState.fields.map(f => `<option>${f.name}</option>`).join('')}</select></div>
+                    <div class="form-group"><label>AI Recommendation</label><div style="padding:0.75rem;background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(6,182,212,0.05));border:1px solid rgba(16,185,129,0.2);border-radius:var(--radius-md);font-size:0.85rem;color:var(--text-secondary)">💡 AI recommends NPK for Field B - nitrogen levels declining</div></div>
+                    <button class="btn-primary" style="width:100%" onclick="submitAction('Fertilizer application logged')">Log Application</button>
+                `
+            },
+            harvest: {
+                title: '🌾 Log Harvest',
+                body: `
+                    <div class="form-group"><label>Field</label><select>${AppState.fields.map(f => `<option>${f.name}</option>`).join('')}</select></div>
+                    <div class="form-group"><label>Yield (tons)</label><input type="number" step="0.1" value="2.5"></div>
+                    <div class="form-group"><label>Quality Grade</label><select><option>Grade A (Premium)</option><option>Grade B (Standard)</option><option>Grade C (Feed)</option></select></div>
+                    <div class="form-group"><label>AI Prediction</label><div style="padding:0.75rem;background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(6,182,212,0.05));border:1px solid rgba(16,185,129,0.2);border-radius:var(--radius-md);font-size:0.85rem;color:var(--text-secondary)">💡 AI predicts 2.8 tons for Field C at 92% maturity</div></div>
+                    <button class="btn-primary" style="width:100%" onclick="submitAction('Harvest logged successfully')">Save Record</button>
+                `
+            },
+            alert: {
+                title: '🔔 Set Alert',
+                body: `
+                    <div class="form-group"><label>Alert Type</label><select><option>Weather Warning</option><option>Irrigation Reminder</option><option>Pest Detection</option><option>Harvest Ready</option><option>Low Stock</option></select></div>
+                    <div class="form-group"><label>Field</label><select><option>All Fields</option>${AppState.fields.map(f => `<option>${f.name}</option>`).join('')}</select></div>
+                    <div class="form-group"><label>Reminder Time</label><input type="datetime-local"></div>
+                    <div class="form-group"><label>Notification Method</label><select><option>Push Notification</option><option>Email</option><option>SMS</option></select></div>
+                    <button class="btn-primary" style="width:100%" onclick="submitAction('Alert set successfully')">Set Alert</button>
+                `
+            },
+            'add-field': {
+                title: '🚜 Add New Field',
+                body: `
+                    <div class="form-group"><label>Field Name</label><input type="text" placeholder="e.g., Field D - Corn"></div>
+                    <div class="form-group"><label>Crop Type</label><select><option>Wheat</option><option>Barley</option><option>Oats</option><option>Corn</option><option>Potatoes</option><option>Tomatoes</option></select></div>
+                    <div class="form-group"><label>Size (hectares)</label><input type="number" step="0.1" placeholder="5.0"></div>
+                    <div class="form-group"><label>Location</label><input type="text" placeholder="e.g., Blida"></div>
+                    <div class="form-group"><label>GPS Coordinates</label><input type="text" placeholder="Auto-detect or enter manually"></div>
+                    <button class="btn-primary" style="width:100%" onclick="addNewField()">Add Field</button>
+                `
+            },
+            'add-item': {
+                title: '📦 Add Inventory Item',
+                body: `
+                    <div class="form-group"><label>Item Name</label><input type="text" placeholder="e.g., Pesticide"></div>
+                    <div class="form-group"><label>Category</label><select><option value="seeds">Seeds</option><option value="fertilizer">Fertilizer</option><option value="equipment">Equipment</option><option value="pesticide">Pesticide</option></select></div>
+                    <div class="form-group"><label>Initial Stock</label><input type="number" placeholder="0"></div>
+                    <div class="form-group"><label>Max Capacity</label><input type="number" placeholder="100"></div>
+                    <div class="form-group"><label>Unit</label><input type="text" placeholder="kg, bags, units..."></div>
+                    <button class="btn-primary" style="width:100%" onclick="submitAction('Item added to inventory')">Add Item</button>
+                `
+            },
+            'add-worker': {
+                title: '👷 Add Worker',
+                body: `
+                    <div class="form-group"><label>Full Name</label><input type="text" placeholder="e.g., Ali Benali"></div>
+                    <div class="form-group"><label>Role</label><select><option>Field Manager</option><option>Agronomist</option><option>Equipment Operator</option><option>Data Analyst</option><option>Irrigation Technician</option><option>Quality Inspector</option></select></div>
+                    <div class="form-group"><label>Phone</label><input type="tel" placeholder="+213..."></div>
+                    <div class="form-group"><label>Email</label><input type="email" placeholder="worker@qfarming.com"></div>
+                    <button class="btn-primary" style="width:100%" onclick="submitAction('Worker added successfully')">Add Worker</button>
+                `
+            },
+            'add-event': {
+                title: '📅 Add Calendar Event',
+                body: `
+                    <div class="form-group"><label>Event Title</label><input type="text" placeholder="e.g., Field Inspection"></div>
+                    <div class="form-group"><label>Date & Time</label><input type="datetime-local"></div>
+                    <div class="form-group"><label>Field</label><select><option>All Fields</option>${AppState.fields.map(f => `<option>${f.name}</option>`).join('')}</select></div>
+                    <div class="form-group"><label>Assign To</label><select><option>Unassigned</option>${AppState.workers.map(w => `<option>${w.name}</option>`).join('')}</select></div>
+                    <div class="form-group"><label>Priority</label><select><option>Low</option><option>Medium</option><option>High</option><option>Urgent</option></select></div>
+                    <button class="btn-primary" style="width:100%" onclick="submitAction('Event added to calendar')">Add Event</button>
+                `
+            },
+            'quick-action': {
+                title: '⚡ Quick Actions',
+                body: `
+                    <div class="action-grid" style="margin-bottom:1rem">
+                        <button class="action-btn" onclick="closeModal();openModal('irrigation')"><span class="icon">💧</span><span class="label">Irrigation</span></button>
+                        <button class="action-btn" onclick="closeModal();openModal('fertilizer')"><span class="icon">🧪</span><span class="label">Fertilizer</span></button>
+                        <button class="action-btn" onclick="closeModal();openModal('harvest')"><span class="icon">🌾</span><span class="label">Harvest</span></button>
+                        <button class="action-btn" onclick="closeModal();openModal('alert')"><span class="icon">🔔</span><span class="label">Alert</span></button>
+                    </div>
+                `
+            }
+        };
+
+        const modal = modals[type];
+        if (modal) {
+            const modalBody = document.getElementById('modal-body');
+            modalBody.innerHTML = `
+                <div class="modal-header">
+                    <h3 class="modal-title">${modal.title}</h3>
+                    <button class="modal-close" onclick="closeModal()">×</button>
+                </div>
+                ${modal.body}
+            `;
+            document.getElementById('modal-overlay').classList.add('visible');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function showModal(title, body) {
+        const modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = `
+            <div class="modal-header">
+                <h3 class="modal-title">${title}</h3>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            ${body}
+        `;
+        document.getElementById('modal-overlay').classList.add('visible');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('modal-overlay').classList.remove('visible');
+        document.body.style.overflow = '';
+    }
+
+    function submitAction(message) {
+        closeModal();
+        showToast('✅ ' + message, 'success');
+        AppState.activities.unshift({
+            id: Date.now(),
+            title: message,
+            time: 'Just now',
+            icon: '✅',
+            type: 'success'
+        });
+        if (AppState.activities.length > 10) AppState.activities.pop();
+        localStorage.setItem('qf-activities', JSON.stringify(AppState.activities));
+        renderActivities();
+    }
+
+    function addNewField() {
+        const inputs = document.querySelectorAll('#modal-body input, #modal-body select');
+        const newField = {
+            id: Date.now(),
+            name: inputs[0].value || 'New Field',
+            crop: inputs[1].value,
+            size: parseFloat(inputs[2].value) || 0,
+            location: inputs[3].value || 'Unknown',
+            lat: '36.75°N',
+            lng: '3.06°E',
+            moisture: 60,
+            temp: 30,
+            status: 'active',
+            progress: 0
+        };
+        AppState.fields.push(newField);
+        localStorage.setItem('qf-fields', JSON.stringify(AppState.fields));
+        renderFields();
+        submitAction('Field "' + newField.name + '" added successfully');
+    }
+
+    // ============================================
+    // TOAST NOTIFICATIONS
+    // ============================================
+    function showToast(message, type = 'success') {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = 'toast toast-' + type;
+        const icons = { success: '✅', warning: '⚠️', error: '❌', info: 'ℹ️' };
+        toast.innerHTML = `<span class="toast-icon">${icons[type] || '✅'}</span><span>${message}</span>`;
+        container.appendChild(toast);
+
+        requestAnimationFrame(() => {
+            toast.classList.add('visible');
+        });
+
+        setTimeout(() => {
+            toast.classList.remove('visible');
+            setTimeout(() => toast.remove(), 500);
+        }, 3000);
+    }
+
+    // ============================================
+    // SERVICE WORKER
+    // ============================================
+    function setupServiceWorker() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('SW registered:', reg.scope))
+                .catch(err => console.log('SW registration failed:', err));
+        }
+    }
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+            if (AppState.notificationsOpen) toggleNotifications();
+        }
+    });
+    </script>
+</body>
+</html>
